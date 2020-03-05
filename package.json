@@ -1,0 +1,37 @@
+{
+  "name": "fb-messenger-chatbot",
+  "version": "1.0.0",
+  "description": "A fb messenger chatbot to help prospective and already enrolled students of Hogwarts's School of Witchcraft and Wizardry",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinMwita7/fb-messenger-chatbot.git"
+  },
+  "keywords": [
+    "messaging",
+    "communication",
+    "chatboot",
+    "facebook",
+    "messenger"
+  ],
+  "author": "Kevin Babu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KevinMwita7/fb-messenger-chatbot/issues"
+  },
+  "homepage": "https://github.com/KevinMwita7/fb-messenger-chatbot#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "morgan": "^1.9.1",
+    "redis": "^3.0.2"
+  }
+}
