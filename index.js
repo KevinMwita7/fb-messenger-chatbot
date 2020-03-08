@@ -4,6 +4,7 @@ const logger = require("morgan");
 const errorHandler = require("errorhandler");
 const compression = require("compression");
 const cors = require("cors");
+const Handler = require("./services/handler");
 // const { PORT, VERIFICATION_TOKEN } = require("./config");
 const app = express();
 
@@ -48,7 +49,13 @@ app.post('/webhook', (req, res) => {
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0];
-        console.log(webhook_event);
+        // get the sender's PSID
+        let sender_psid = webhook_event.sender.id;
+        // handle the webhook event appropriately depending on its type
+        if(webhook_event.message) {
+          let handleWebhook = new Handler(sender_psid);
+          handleWebhook.handleMessage(webhook_event.message);
+        }
       });
       // Returns a '200 OK' response to all requests
       res.status(200).send('EVENT_RECEIVED\n');
