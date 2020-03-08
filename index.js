@@ -4,11 +4,11 @@ const logger = require("morgan");
 const errorHandler = require("errorhandler");
 const compression = require("compression");
 const cors = require("cors");
-const { PORT, VERIFICATION_TOKEN } = require("./config");
+// const { PORT, VERIFICATION_TOKEN } = require("./config");
 const app = express();
 
 // set the port app will listen on
-app.set("port", PORT);
+app.set("port", process.env.PORT);
 
 // register middlewares
 app.use(cors());
@@ -27,7 +27,7 @@ app.get('/webhook', (req, res) => {
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
       // Checks the mode and token sent is correct
-      if (mode === 'subscribe' && token === VERIFICATION_TOKEN) {
+      if (mode === 'subscribe' && token === process.env.VERIFICATION_TOKEN) {
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
         res.status(200).send(challenge);
