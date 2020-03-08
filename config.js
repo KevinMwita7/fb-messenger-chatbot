@@ -4,6 +4,7 @@ const process = require("process");
 dotenv.config();
 
 module.exports = {
-    port: process.env.PORT,
-    environment: process.env.NODE_ENV
+    PORT: process.env.PORT,
+    ENVIRONMENT: process.env.NODE_ENV,
+    VERIFICATION_TOKEN: process.env.VERIFICATION_TOKEN
 };
