@@ -35,9 +35,8 @@ module.exports = class Handler {
             for(let attachment of received_message.attachments) {
                 // Gets the URL of the message attachment
                 let attachment_url = attachment.payload.url;
-                console.log('attachment', attachment);
                 let payload = {
-                    attachment_url,
+                    image_url: attachment_url,
                     title: "Is this the right picture?",
                     subtitle: "Tap a button to answer.",
                     buttons: [
