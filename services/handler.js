@@ -1,14 +1,12 @@
 const axios = require('axios').default;
+const ResponseGenerator = require('./response-generator'); 
 
 module.exports = class Handler {
-    constructor(psid) {
-        this.sender_psid = psid;
-    }
-    callSendAPI(response) {
+    callSendAPI(sender_psid, response) {
         // Construct the message body
         let request_body = {
             "recipient": {
-            "id": this.sender_psid
+            "id": sender_psid
             },
             "message": response
         };
@@ -25,15 +23,41 @@ module.exports = class Handler {
             console.log("Message not sent", error);
         });
     }
-    handleMessage(received_message) {
+    
+    handleMessage(sender_psid, received_message) {
         let response;
         if (received_message.text) {    
           // Create the payload for a basic text message
           response = {
             "text": `You sent the message: "${received_message.text}". Now send me an image!`
           };
-        }  
+        }  else if(received_message.attachments) {
+            for(let attachment of received_message.attachments) {
+                // Gets the URL of the message attachment
+                let attachment_url = attachment.payload.url;
+                // Ensure there is an attachment_url
+                if(attachment_url) {
+                    let payload = {
+                        attachment_url,
+                        title: "Is this the right picture?",
+                        subtitle: "Tap a button to answer.",
+                        buttons: [
+                            {
+                              "type": "postback",
+                              "title": "Yes!",
+                              "payload": "yes",
+                            },
+                            {
+                              "type": "postback",
+                              "title": "No!",
+                              "payload": "no",
+                            }]
+                    };
+                    response = ResponseGenerator.generateGenericTemplate(payload);
+                }
+            }
+        }
         // Sends the response message
-        this.callSendAPI(response);  
+        this.callSendAPI(sender_psid, response);  
     }
-}
+};

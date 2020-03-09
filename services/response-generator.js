@@ -9,8 +9,23 @@ module.exports = class ResponseGenerator {
 
     }
 
-    static generateGenericTemplate() {
-
+    static generateGenericTemplate({image_url, title, subtitle , buttons}) {
+        return {
+            attachment: {
+              type: "template",
+              payload: {
+                template_type: "generic",
+                elements: [
+                  {
+                    title: title,
+                    subtitle: subtitle,
+                    image_url: image_url,
+                    buttons: buttons
+                  }
+                ]
+              }
+            }
+          };
     }
 
     static generateImageTemplate() {

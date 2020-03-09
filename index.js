@@ -53,8 +53,8 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
         // handle the webhook event appropriately depending on its type
         if(webhook_event.message) {
-          let handleWebhook = new Handler(sender_psid);
-          handleWebhook.handleMessage(webhook_event.message);
+          let handleWebhook = new Handler();
+          handleWebhook.handleMessage(sender_psid, webhook_event.message);
         }
       });
       // Returns a '200 OK' response to all requests
