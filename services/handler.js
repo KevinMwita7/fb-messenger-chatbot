@@ -60,7 +60,7 @@ module.exports = class Handler {
 
     handlePostback(sender_psid, received_postback) {
         let response;
-
+        console.log('received_postback', received_postback);
         // Get the payload for the postback
         let payload = received_postback.payload;
 
