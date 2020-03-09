@@ -42,6 +42,7 @@ app.get('/webhook', (req, res) => {
 // handle POST requests to the webhook
 app.post('/webhook', (req, res) => {  
     let body = req.body;
+    let handleWebhook = new Handler();
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
       // Iterates over each entry - there may be multiple if batched
@@ -53,8 +54,9 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
         // handle the webhook event appropriately depending on its type
         if(webhook_event.message) {
-          let handleWebhook = new Handler();
           handleWebhook.handleMessage(sender_psid, webhook_event.message);
+        } else if(webhook_event.postback) {
+          handleWebhook.handlePostback(sender_psid, webhook_event.postback);
         }
       });
       // Returns a '200 OK' response to all requests
