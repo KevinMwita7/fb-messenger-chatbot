@@ -23,7 +23,7 @@ module.exports = class Handler {
             console.log("Message not sent", error);
         });
     }
-    
+
     handleMessage(sender_psid, received_message) {
         let response;
         if (received_message.text) {    
@@ -35,26 +35,24 @@ module.exports = class Handler {
             for(let attachment of received_message.attachments) {
                 // Gets the URL of the message attachment
                 let attachment_url = attachment.payload.url;
-                // Ensure there is an attachment_url
-                if(attachment_url) {
-                    let payload = {
-                        attachment_url,
-                        title: "Is this the right picture?",
-                        subtitle: "Tap a button to answer.",
-                        buttons: [
-                            {
-                              "type": "postback",
-                              "title": "Yes!",
-                              "payload": "yes",
-                            },
-                            {
-                              "type": "postback",
-                              "title": "No!",
-                              "payload": "no",
-                            }]
-                    };
-                    response = ResponseGenerator.generateGenericTemplate(payload);
-                }
+                console.log('attachment', attachment);
+                let payload = {
+                    attachment_url,
+                    title: "Is this the right picture?",
+                    subtitle: "Tap a button to answer.",
+                    buttons: [
+                        {
+                            "type": "postback",
+                            "title": "Yes!",
+                            "payload": "yes",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "No!",
+                            "payload": "no",
+                        }]
+                };
+                response = ResponseGenerator.generateGenericTemplate(payload);
             }
         }
         // Sends the response message
