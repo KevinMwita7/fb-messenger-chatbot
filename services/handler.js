@@ -1,5 +1,6 @@
-const axios = require('axios').default;
-const ResponseGenerator = require('./response-generator'); 
+const axios = require("axios").default;
+const ResponseGenerator = require("./response-generator"); 
+const responses = require("../fixtures/responses.js");
 
 module.exports = class Handler {
     callSendAPI(sender_psid, response) {
@@ -64,10 +65,16 @@ module.exports = class Handler {
         let payload = received_postback.payload;
 
         // Set the response based on the postback payload
-        if (payload === 'yes') {
-            response = { "text": "Thanks!" };
-        } else if (payload === 'no') {
-            response = { "text": "Oops, try sending another image." };
+        switch(payload) {
+            case "get_started":
+                response = ResponseGenerator.generateText(responses.profile.text);
+                break;
+            case "yes":
+                response = { "text": "Thanks!" };
+                break;
+            case "no":
+                response = { "text": "Oops, try sending another image." };
+                break;
         }
         // Send the message to acknowledge the postback
         this.callSendAPI(sender_psid, response);
