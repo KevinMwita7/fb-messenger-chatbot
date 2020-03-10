@@ -7,8 +7,10 @@ module.exports = class ResponseGenerator {
       };  
     }
 
-    static generateQuickReply() {
-
+    static generateQuickReply(text, attachment, quick_replies) {
+      let quickReply = {};
+      if(text) quickReply.text = text;
+      if(attachment) quickReply.attachment = attachment;
     }
 
     static generateGenericTemplate({image_url, title, subtitle , buttons}) {
@@ -34,18 +36,18 @@ module.exports = class ResponseGenerator {
         
     }
 
-    static generateButtonTemplate() {
-
-    }
-
     static generateTextWithPersona() {
 
     }
 
-    static generatePostBackButton() {
-
+    static generatePostbackButton(type, title, payload) {
+      return {
+        type, title, payload
+      };
     }
-    static generateWebUrlButton() {
-
+    static generateWebUrlButton(type, title, url) {
+      return {
+        type, title, url
+      };
     }
-}
+};

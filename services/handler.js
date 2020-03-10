@@ -46,18 +46,16 @@ module.exports = class Handler {
             // Set the response based on the postback payload
             switch(payload) {
                 case "get_started":
-                    let text = responses.profile.text.replace("{{user_first_name}}", user.first_name);
+                    let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
-                    break;
-                case "yes":
-                    response = { "text": "Thanks!" };
-                    break;
-                case "no":
-                    response = { "text": "Oops, try sending another image." };
+                    FacebookApi.callSendAPI(user.id, response);
+                    setTimeout(() => {
+                        // send a follow up message telling the user to select an option from list
+                        repsonse =  ResponseGenerator.generateText(responses.get_started.start);
+                        FacebookApi.callSendAPI(user.id, response);
+                    }, 2000);
                     break;
             }
-            // Send the message to acknowledge the postback
-            FacebookApi.callSendAPI(user.id, response);
         } catch(e) {
             console.log(e);
         }
