@@ -26,22 +26,24 @@ module.exports = class FacebookApi {
     }
 
     static fetchUser(sender_psid) {
-        let options = {
-            method: "get",
-            url: GRAPH_API_BASE_URL + sender_psid,
-            params: {
-                access_token: process.env.PAGE_ACCESS_TOKEN,
-                fields: "first_name, last_name, profile_pic"
-            }
-        };
-        axios(options)
-        .then(response => {
-            console.log(response);
-            return response;
-        })
-        .catch(error => {
-            console.log(error);
-            return new Error(error);
+        return new Promise((resolve, reject) => {
+            let options = {
+                method: "get",
+                url: GRAPH_API_BASE_URL + sender_psid,
+                params: {
+                    access_token: process.env.PAGE_ACCESS_TOKEN,
+                    fields: "id, first_name, last_name, profile_pic"
+                }
+            };
+            axios(options)
+            .then(response => {
+                if(response.status === 200 && response.data) {
+                    resolve(response.data);
+                }
+            })
+            .catch(error => {
+                 reject(new Error(error));
+            });
         });
     }
 };

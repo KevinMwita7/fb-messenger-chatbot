@@ -4,7 +4,7 @@ const responses = require("../fixtures/responses.js");
 const FacebookApi = require('./api');
 
 module.exports = class Handler {
-    handleMessage(sender_psid, received_message) {
+    handleMessage(user, received_message) {
         let response;
         if (received_message.text) {    
           // Create the payload for a basic text message
@@ -35,30 +35,32 @@ module.exports = class Handler {
             }
         }
         // Sends the response message
-        FacebookApi.callSendAPI(sender_psid, response);  
+        FacebookApi.callSendAPI(user.id, response);  
     }
 
-    handlePostback(sender_psid, received_postback) {
+    handlePostback(user, received_postback) {
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
-        let user;
-        
-        // Set the response based on the postback payload
-        switch(payload) {
-            case "get_started":
-                response = ResponseGenerator.generateText(responses.profile.text);
-                user = FacebookApi.fetchUser(sender_psid);
-                console.log(user);
-                break;
-            case "yes":
-                response = { "text": "Thanks!" };
-                break;
-            case "no":
-                response = { "text": "Oops, try sending another image." };
-                break;
+        console.log("user_postback", user);
+        try {
+            // Set the response based on the postback payload
+            switch(payload) {
+                case "get_started":
+                    response = ResponseGenerator.generateText(responses.profile.text);
+                    response.replace("{{user_first_name}}", user.first_name);
+                    break;
+                case "yes":
+                    response = { "text": "Thanks!" };
+                    break;
+                case "no":
+                    response = { "text": "Oops, try sending another image." };
+                    break;
+            }
+            // Send the message to acknowledge the postback
+            FacebookApi.callSendAPI(user.id, response);
+        } catch(e) {
+            console.log(e);
         }
-        // Send the message to acknowledge the postback
-        FacebookApi.callSendAPI(sender_psid, response);
     }
 };

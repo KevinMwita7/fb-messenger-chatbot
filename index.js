@@ -1,11 +1,12 @@
-const event = require("events").EventEmitter;
-const express = require("express");
-const logger = require("morgan");
-const errorHandler = require("errorhandler");
-const compression = require("compression");
-const cors = require("cors");
-const Handler = require("./services/handler");
-// const { PORT, VERIFICATION_TOKEN } = require("./config");
+const event = require("events").EventEmitter, 
+express = require("express"), 
+logger = require("morgan"), 
+errorHandler = require("errorhandler"),
+compression = require("compression"),
+cors = require("cors"),
+Handler = require("./services/handler"),
+FacebookApi = require("./services/api");
+
 const app = express();
 
 // set the port app will listen on
@@ -18,6 +19,9 @@ app.use(logger('dev'));
 app.use(errorHandler());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// an array of all the users chatting with our bot
+let users = {};
 
 // handle GET requests for the webhook
 app.get('/webhook', (req, res) => {      
@@ -51,13 +55,34 @@ app.post('/webhook', (req, res) => {
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0];
+        
         // get the sender's PSID
         let sender_psid = webhook_event.sender.id;
-        // handle the webhook event appropriately depending on its type
-        if(webhook_event.message) {
-          handleWebhook.handleMessage(sender_psid, webhook_event.message);
-        } else if(webhook_event.postback) {
-          handleWebhook.handlePostback(sender_psid, webhook_event.postback);
+        
+        // if the user already exists in the users object, then send the message
+        if(sender_psid in users) {
+          // handle the webhook event appropriately depending on its type
+          if(webhook_event.message) {
+            handleWebhook.handleMessage(users.sender_psid, webhook_event.message);
+          } else if(webhook_event.postback) {
+            handleWebhook.handlePostback(users.sender_psid, webhook_event.postback);
+          }
+        } else {
+          // get the user
+            FacebookApi.fetchUser(sender_psid)
+            .then(user => {
+              // add the user to the user's object
+              users[sender_psid] = user;
+
+              // handle the webhook event appropriately depending on its type
+              if(webhook_event.message) {
+                handleWebhook.handleMessage(users.sender_psid, webhook_event.message);
+              } else if(webhook_event.postback) {
+                handleWebhook.handlePostback(users.sender_psid, webhook_event.postback);
+              }
+            }).catch(error => {
+              console.log("Error while fethcing user", error);
+            });
         }
       });
       // Returns a '200 OK' response to all requests
