@@ -3,7 +3,7 @@ module.exports = {
         greetings: {
             text: "Hello {{user_first_name}}. I am Julia, your Remote University Digital Assistant."
         }, start: {
-            text: "Please write your question or choose one of the options below to get help with."
+            text: "Please write your question or choose one of the options below to get started."
         }
     },
     programs : {
