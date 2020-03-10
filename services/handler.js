@@ -1,7 +1,8 @@
 const axios = require("axios").default;
 const ResponseGenerator = require("./response-generator"); 
 const responses = require("../fixtures/responses.js");
-const FacebookApi = require('./api');
+const FacebookApi = require("./api");
+const senderAction = require("./sender-actions");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -49,10 +50,12 @@ module.exports = class Handler {
                     let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
                     FacebookApi.callSendAPI(user.id, response);
+                    senderAction(user.id, "typing_on");
                     setTimeout(() => {
                         // send a follow up message telling the user to select an option from list
                         response =  ResponseGenerator.generateText(responses.get_started.start.text);
                         FacebookApi.callSendAPI(user.id, response);
+                        senderAction(user.id, "typing_on");
                     }, 2000);
                     break;
             }

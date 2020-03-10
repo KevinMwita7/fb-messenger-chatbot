@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const { GRAPH_API_BASE_URL } = require("../utils/constants");
+const { GRAPH_API_BASE_URL, GRAPH_API_MESSAGES_URL } = require("../utils/constants");
 
 // interface class to house all functions requesting data from facebook
 module.exports = class FacebookApi {
@@ -13,7 +13,7 @@ module.exports = class FacebookApi {
         };
         axios({
             method: "post",
-            url: "https://graph.facebook.com/v2.6/me/messages",
+            url: GRAPH_API_MESSAGES_URL,
             params: {
                 access_token: process.env.PAGE_ACCESS_TOKEN
             },
