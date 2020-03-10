@@ -63,9 +63,9 @@ app.post('/webhook', (req, res) => {
         if(sender_psid in users) {
           // handle the webhook event appropriately depending on its type
           if(webhook_event.message) {
-            handleWebhook.handleMessage(users.sender_psid, webhook_event.message);
+            handleWebhook.handleMessage(users[sender_psid], webhook_event.message);
           } else if(webhook_event.postback) {
-            handleWebhook.handlePostback(users.sender_psid, webhook_event.postback);
+            handleWebhook.handlePostback(users[sender_psid], webhook_event.postback);
           }
         } else {
           // get the user
@@ -76,9 +76,9 @@ app.post('/webhook', (req, res) => {
 
               // handle the webhook event appropriately depending on its type
               if(webhook_event.message) {
-                handleWebhook.handleMessage(users.sender_psid, webhook_event.message);
+                handleWebhook.handleMessage(users[sender_psid], webhook_event.message);
               } else if(webhook_event.postback) {
-                handleWebhook.handlePostback(users.sender_psid, webhook_event.postback);
+                handleWebhook.handlePostback(users[sender_psid], webhook_event.postback);
               }
             }).catch(error => {
               console.log("Error while fethcing user", error);

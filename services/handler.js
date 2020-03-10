@@ -42,7 +42,6 @@ module.exports = class Handler {
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
-        console.log("user_postback", user);
         try {
             // Set the response based on the postback payload
             switch(payload) {
