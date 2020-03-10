@@ -51,7 +51,7 @@ module.exports = class Handler {
                     FacebookApi.callSendAPI(user.id, response);
                     setTimeout(() => {
                         // send a follow up message telling the user to select an option from list
-                        repsonse =  ResponseGenerator.generateText(responses.get_started.start);
+                        response =  ResponseGenerator.generateText(responses.get_started.start.text);
                         FacebookApi.callSendAPI(user.id, response);
                     }, 2000);
                     break;
