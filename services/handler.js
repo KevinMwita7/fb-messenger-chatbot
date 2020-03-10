@@ -66,9 +66,9 @@ module.exports = class Handler {
 
         // Set the response based on the postback payload
         switch(payload) {
-            case "get_started":
+            /*case "get_started":
                 response = ResponseGenerator.generateText(responses.profile.text);
-                break;
+                break;*/
             case "yes":
                 response = { "text": "Thanks!" };
                 break;
