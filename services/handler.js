@@ -47,7 +47,7 @@ module.exports = class Handler {
             switch(payload) {
                 case "get_started":
                     response = ResponseGenerator.generateText(responses.profile.text);
-                    response.replace("{{user_first_name}}", user.first_name);
+                    response.text.replace("{{user_first_name}}", user.first_name);
                     break;
                 case "yes":
                     response = { "text": "Thanks!" };
