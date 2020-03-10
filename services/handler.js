@@ -46,8 +46,8 @@ module.exports = class Handler {
             // Set the response based on the postback payload
             switch(payload) {
                 case "get_started":
+                    console.log(user);
                     response = ResponseGenerator.generateText(responses.profile.text);
-                    response.text.replace("{{user_first_name}}", user.first_name);
                     break;
                 case "yes":
                     response = { "text": "Thanks!" };
