@@ -4,15 +4,15 @@ const { GRAPH_API_BASE_URL } = require('../utils/constants');
 module.exports  = function senderAction(sender_psid, type) {
     let options = {
         method: "post",
-        baseURL: GRAPH_API_BASE_URL,
+        url: GRAPH_API_BASE_URL,
         params: {
             access_token: process.env.PAGE_ACCESS_TOKEN
         },
         data: {
-            recipient: {
-                id: sender_psid
+            "recipient": {
+                "id": sender_psid
             },
-            sender_action: type
+            "sender_action": type
         }
     };
     axios(options)
