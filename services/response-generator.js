@@ -8,9 +8,25 @@ module.exports = class ResponseGenerator {
     }
 
     static generateQuickReply(text, attachment, quick_replies) {
-      let quickReply = {};
-      if(text) quickReply.text = text;
+      let quickReply = {
+        text: text,
+        quick_replies: []
+      };
+      
       if(attachment) quickReply.attachment = attachment;
+
+      for(let quick_reply of quick_replies) {
+        quickReply.quick_replies.push(
+          // using json.stringify so that keys with undefined values are removed
+          JSON.stringify({
+            content_type: "text",
+            title: quick_reply.title,
+            payload: quick_reply.payload,
+            image_url: quick_reply.image_url
+          })
+        );
+      }
+      return quickReply;
     }
 
     static generateGenericTemplate({image_url, title, subtitle , buttons}) {

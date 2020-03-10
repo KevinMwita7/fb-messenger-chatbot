@@ -49,13 +49,18 @@ module.exports = class Handler {
                 case "get_started":
                     let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
-                    FacebookApi.callSendAPI(user.id, response);
                     senderAction(user.id, "typing_on");
+                    FacebookApi.callSendAPI(user.id, response);
                     setTimeout(() => {
                         // send a follow up message telling the user to select an option from list
-                        response =  ResponseGenerator.generateText(responses.get_started.start.text);
-                        FacebookApi.callSendAPI(user.id, response);
                         senderAction(user.id, "typing_on");
+                        response =  ResponseGenerator.generateQuickReply(responses.get_started.start.text, undefined, [
+                            {title: "Application", payload: "application"},
+                            {title: "Programs", payload: "programs"},
+                            {title: "Costs", payload:"cost"},
+                            {title: "Frequently Asked Questions", payload:"faq"}
+                        ]);
+                        FacebookApi.callSendAPI(user.id, response);
                     }, 2000);
                     break;
             }
