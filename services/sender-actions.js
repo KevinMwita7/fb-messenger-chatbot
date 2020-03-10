@@ -1,10 +1,10 @@
 const axios = require("axios").default;
-const { GRAPH_API_BASE_URL } = require('../utils/constants');
+const { GRAPH_API_MESSAGES_URL } = require('../utils/constants');
 
 module.exports  = function senderAction(sender_psid, type) {
     let options = {
         method: "post",
-        url: GRAPH_API_BASE_URL,
+        url: GRAPH_API_MESSAGES_URL,
         params: {
             access_token: process.env.PAGE_ACCESS_TOKEN
         },
