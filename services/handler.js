@@ -1,30 +1,9 @@
 const axios = require("axios").default;
 const ResponseGenerator = require("./response-generator"); 
 const responses = require("../fixtures/responses.js");
+const FacebookApi = require('./api');
 
 module.exports = class Handler {
-    callSendAPI(sender_psid, response) {
-        // Construct the message body
-        let request_body = {
-            "recipient": {
-            "id": sender_psid
-            },
-            "message": response
-        };
-        axios({
-            method: "post",
-            url: 'https://graph.facebook.com/v2.6/me/messages',
-            params: {
-                access_token: process.env.PAGE_ACCESS_TOKEN
-            },
-            data: request_body
-        }).then(res => {
-            console.log("Message successfully sent");
-        }).catch(error => {
-            console.log("Message not sent", error);
-        });
-    }
-
     handleMessage(sender_psid, received_message) {
         let response;
         if (received_message.text) {    
@@ -56,19 +35,22 @@ module.exports = class Handler {
             }
         }
         // Sends the response message
-        this.callSendAPI(sender_psid, response);  
+        FacebookApi.callSendAPI(sender_psid, response);  
     }
 
     handlePostback(sender_psid, received_postback) {
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
-
+        let user;
+        
         // Set the response based on the postback payload
         switch(payload) {
-            /*case "get_started":
+            case "get_started":
                 response = ResponseGenerator.generateText(responses.profile.text);
-                break;*/
+                user = FacebookApi.fetchUser(sender_psid);
+                console.log(user);
+                break;
             case "yes":
                 response = { "text": "Thanks!" };
                 break;
@@ -77,6 +59,6 @@ module.exports = class Handler {
                 break;
         }
         // Send the message to acknowledge the postback
-        this.callSendAPI(sender_psid, response);
+        FacebookApi.callSendAPI(sender_psid, response);
     }
 };
