@@ -7,12 +7,20 @@ const templateButtons =  require("../fixtures/buttons");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
+        // an array to hold all the response to send via the sendApi
+        let responses = [];
         let response;
-        console.log(received_message);
+
+        // mark the last message as read
+        senderAction(user.id, "mark_seen");
+        // show typing indicator
+        senderAction(user.id, "typing_on");
+
         if (received_message.text) {
           // handle quick replies separately
           if(received_message.quick_reply) {
-              this.handleQuickReply(user.id, received_message);
+              response = this.handleQuickReply(received_message);
+              responses.push(response);
           } else {
               // handle the messages entered into the input box
           }
@@ -37,55 +45,50 @@ module.exports = class Handler {
                         }]
                 };
                 response = ResponseGenerator.generateGenericTemplate(payload);
+                responses.push(response);
             }
         }
         // Sends the response message
-        FacebookApi.callSendAPI(user.id, response);  
+        FacebookApi.callSendAPI(user.id, responses);
     }
 
     handlePostback(user, received_postback) {
+        // mark the last message as read
+        senderAction(user.id, "mark_seen");
+        // show a typing indicator to show the bot is generating a reply
+        senderAction(user.id, "typing_on");
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
+        let responses = [];
+
         try {
             // Set the response based on the postback payload
             switch(payload) {
                 case "get_started":
                     let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
-                    // mark the last message as read to show that the bot has received the message
-                    senderAction(user.id, "mark_seen");
-                    // show a typing indeicator to show the bot is generating a reply
-                    senderAction(user.id, "typing_on");
-                    // send a response
-                    FacebookApi.callSendAPI(user.id, response);
-                    setTimeout(() => {
-                        // send a follow up message telling the user to select an option from list
-                        senderAction(user.id, "typing_on");
-                        response =  ResponseGenerator.generateQuickReply(responses.get_started.start.text, undefined, [
-                            {title: "Application", payload: "application"},
-                            {title: "Programs", payload: "programs"},
-                            {title: "Costs", payload:"cost"},
-                            {title: "Frequently Asked Questions", payload:"faq"}
-                        ]);
-                        FacebookApi.callSendAPI(user.id, response);
-                    }, 2000);
+                    responses.push(response);                    
+                    response =  ResponseGenerator.generateQuickReply(responses.get_started.start.text, undefined, [
+                        {title: "Application", payload: "application"},
+                        {title: "Programs", payload: "programs"},
+                        {title: "Costs", payload:"cost"},
+                        {title: "Frequently Asked Questions", payload:"faq"}
+                    ]);
+                    responses.push(response);
                     break;
             }
+            FacebookApi.callSendAPI(user.id, responses, 0);
         } catch(e) {
             console.log(e);
         }
     }
 
-    handleQuickReply(sender_psid, received_message) {
+    handleQuickReply(received_message) {
         let response;
         // Create the payload for a basic text message
         switch(received_message.quick_reply.payload) {
             case "faq":
-                // mark the last message as read
-                senderAction(user.id, "mark_seen");
-                // show typing indicator
-                senderAction(user.id, "typing_on");
                 // generate the frequently asked questions template
                 let payload = {
                     title: responses.faq.title.text,
@@ -96,6 +99,6 @@ module.exports = class Handler {
                 console.log(response);
                 break;
         }
-        FacebookApi.callSendAPI(sender_psid, response);
+        return response;
     }
 };

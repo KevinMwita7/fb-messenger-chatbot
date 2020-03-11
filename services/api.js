@@ -1,28 +1,34 @@
 const axios = require("axios").default;
 const { GRAPH_API_BASE_URL, GRAPH_API_MESSAGES_URL } = require("../utils/constants");
+const senderAction = require("./sender-actions");
 
 // interface class to house all functions requesting data from facebook
 module.exports = class FacebookApi {
-    static callSendAPI(sender_psid, response) {
-        // Construct the message body
-        let request_body = {
-            "recipient": {
-            "id": sender_psid
-            },
-            "message": response
-        };
-        axios({
-            method: "post",
-            url: GRAPH_API_MESSAGES_URL,
-            params: {
-                access_token: process.env.PAGE_ACCESS_TOKEN
-            },
-            data: request_body
-        }).then(res => {
-            console.log("Message successfully sent");
-        }).catch(error => {
-            console.log("Message not sent", error);
-        });
+    static callSendAPI(sender_psid, responses, messageDelay = 0) {
+        // given an array of messages build a request for each of them and send them two seconds apart
+        if(Array.isArray(responses)) {
+            responses.forEach((response, index) => {
+                setTimeout(() => {
+                    // Construct the message body
+                    let request_body = {"recipient": {"id": sender_psid}, "message": response};
+                    axios({
+                        method: "post",
+                        url: GRAPH_API_MESSAGES_URL,
+                        params: {
+                            access_token: process.env.PAGE_ACCESS_TOKEN
+                        },
+                        data: request_body
+                    }).then(res => {
+                        console.log("Message successfully sent");
+                    }).catch(error => {
+                        console.log("Message not sent", error);
+                    });
+                    // if it is the last message, hide the typing indicator
+                    if(index === responses.length - 1) senderAction(sender_psid, "typing_off");
+                }, messageDelay);
+                messageDelay += 2;
+            });
+        } else throw new Error("callSendAPI expects an array of responses as its second argument");
     }
 
     static fetchUser(sender_psid) {
