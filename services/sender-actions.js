@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const { GRAPH_API_MESSAGES_URL } = require('../utils/constants');
 
+// sender action relays the bot is taking to the user e.g typing indicator while generating response
 module.exports  = function senderAction(sender_psid, type) {
     let options = {
         method: "post",

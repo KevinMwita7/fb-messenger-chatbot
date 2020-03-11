@@ -25,5 +25,13 @@ module.exports = {
         web_development: {
             text: "Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the color, font, layout, and more!"
         }
+    },
+    faq: {
+        title: {
+            text: "Frequently Asked Questions."
+        },
+        subtitle: {
+            text: "Pick one to learn more."
+        }
     }
 };

@@ -36,12 +36,13 @@ module.exports = class ResponseGenerator {
               payload: {
                 template_type: "generic",
                 elements: [
-                  {
+                  // using json.stringify so that keys with undefined values are removed
+                  JSON.stringify({
                     title: title,
                     subtitle: subtitle,
                     image_url: image_url,
                     buttons: buttons
-                  }
+                  })
                 ]
               }
             }

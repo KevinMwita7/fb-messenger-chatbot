@@ -3,6 +3,7 @@ const ResponseGenerator = require("./response-generator");
 const responses = require("../fixtures/responses.js");
 const FacebookApi = require("./api");
 const senderAction = require("./sender-actions");
+const templateButtons =  require("../fixtures/buttons");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -49,7 +50,11 @@ module.exports = class Handler {
                 case "get_started":
                     let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
+                    // mark the last message as read to show that the bot has received the message
+                    senderAction(user.id, "mark_seen");
+                    // show a typing indeicator to show the bot is generating a reply
                     senderAction(user.id, "typing_on");
+                    // send a response
                     FacebookApi.callSendAPI(user.id, response);
                     setTimeout(() => {
                         // send a follow up message telling the user to select an option from list
@@ -63,6 +68,19 @@ module.exports = class Handler {
                         FacebookApi.callSendAPI(user.id, response);
                     }, 2000);
                     break;
+                case "faq":
+                    // mark the last message as read
+                    senderAction(user.id, "mark_seen");
+                    // show typing indicator
+                    senderAction(user.id, "typing_on");
+                    // generate the frequently asked questions template
+                    let payload = {
+                        title: responses.faq.title.text,
+                        subtitle: responses.faq.subtitle.text,
+                        buttons: templateButtons.buttons.faq
+                    };
+                    response = ResponseGenerator.generateGenericTemplate(payload);
+                    FacebookApi.callSendAPI(user.id, payload);
             }
         } catch(e) {
             console.log(e);
