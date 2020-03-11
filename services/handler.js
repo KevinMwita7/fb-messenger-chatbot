@@ -10,9 +10,21 @@ module.exports = class Handler {
         let response;
         if (received_message.text) {    
           // Create the payload for a basic text message
-          response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
-          };
+          switch(received_message.text) {
+            case "faq":
+                // mark the last message as read
+                senderAction(user.id, "mark_seen");
+                // show typing indicator
+                senderAction(user.id, "typing_on");
+                // generate the frequently asked questions template
+                let payload = {
+                    title: responses.faq.title.text,
+                    subtitle: responses.faq.subtitle.text,
+                    buttons: templateButtons.buttons.faq
+                };
+                response = ResponseGenerator.generateGenericTemplate(payload);
+                break;
+          }
         }  else if(received_message.attachments) {
             for(let attachment of received_message.attachments) {
                 // Gets the URL of the message attachment
@@ -68,19 +80,6 @@ module.exports = class Handler {
                         FacebookApi.callSendAPI(user.id, response);
                     }, 2000);
                     break;
-                case "faq":
-                    // mark the last message as read
-                    senderAction(user.id, "mark_seen");
-                    // show typing indicator
-                    senderAction(user.id, "typing_on");
-                    // generate the frequently asked questions template
-                    let payload = {
-                        title: responses.faq.title.text,
-                        subtitle: responses.faq.subtitle.text,
-                        buttons: templateButtons.buttons.faq
-                    };
-                    response = ResponseGenerator.generateGenericTemplate(payload);
-                    FacebookApi.callSendAPI(user.id, payload);
             }
         } catch(e) {
             console.log(e);
