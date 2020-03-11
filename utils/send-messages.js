@@ -2,6 +2,7 @@ const FacebookApi = require("../services/api");
 const senderActions = require("../services/sender-actions");
 
 module.exports = function sendMessages(sender_psid, responses) {
+    console.log(responses)
     let delay = 0;
     if(Array.isArray(responses)) {
         responses.forEach((response, index) => {
