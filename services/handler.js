@@ -80,7 +80,7 @@ module.exports = class Handler {
             }
             FacebookApi.callSendAPI(user.id, responses, 0);
         } catch(e) {
-            console.log(e);
+            // console.log(e);
         }
     }
 
@@ -96,7 +96,6 @@ module.exports = class Handler {
                     buttons: templateButtons.buttons.faq
                 };
                 response = ResponseGenerator.generateGenericTemplate(payload);
-                console.log(response);
                 break;
         }
         return response;
