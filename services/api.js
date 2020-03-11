@@ -17,7 +17,7 @@ module.exports = class FacebookApi {
         }).then(res => {
             console.log("Message successfully sent");
         }).catch(error => {
-           // console.log("Message not sent", error);
+           console.log("Message not sent", error);
         });
         senderAction(sender_psid, "typing_off");
     }
