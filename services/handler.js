@@ -50,14 +50,14 @@ module.exports = class Handler {
         }
         console.log(responses);
         // Sends the response message
-        // FacebookApi.callSendAPI(user.id, responses, 0);
+        // FacebookApi.callSendAPI(user.id, responses);
     }
 
     handlePostback(user, received_postback) {
         // mark the last message as read
-        senderAction(user.id, "mark_seen");
+        // senderAction(user.id, "mark_seen");
         // show a typing indicator to show the bot is generating a reply
-        senderAction(user.id, "typing_on");
+        // senderAction(user.id, "typing_on");
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
@@ -79,7 +79,8 @@ module.exports = class Handler {
                     responses.push(response);
                     break;
             }
-            FacebookApi.callSendAPI(user.id, responses, 0);
+            // FacebookApi.callSendAPI(user.id, responses);
+            console.log(responses);
         } catch(e) {
             // console.log(e);
         }
