@@ -84,7 +84,7 @@ module.exports = class Handler {
             // FacebookApi.callSendAPI(user.id, responses);
             sendMessages(user.id, responses);
         } catch(e) {
-            console.log(e);
+            // console.log(e);
         }
     }
 
