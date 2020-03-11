@@ -57,9 +57,9 @@ module.exports = class Handler {
 
     handlePostback(user, received_postback) {
         // mark the last message as read
-        // senderAction(user.id, "mark_seen");
+        senderAction(user.id, "mark_seen");
         // show a typing indicator to show the bot is generating a reply
-        // senderAction(user.id, "typing_on");
+        senderAction(user.id, "typing_on");
         let response;
         // Get the payload for the postback
         let payload = received_postback.payload;
@@ -71,7 +71,7 @@ module.exports = class Handler {
                 case "get_started":
                     let text = botResponses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
-                    responses.push(response);                    
+                    responses.push(response);                 
                     response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
                         {title: "Application", payload: "application"},
                         {title: "Programs", payload: "programs"},
@@ -83,7 +83,6 @@ module.exports = class Handler {
             }
             // FacebookApi.callSendAPI(user.id, responses);
             sendMessages(user.id, responses);
-            console.log(responses);
         } catch(e) {
             // console.log(e);
         }

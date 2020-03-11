@@ -8,7 +8,7 @@ module.exports = function sendMessages(sender_psid, responses) {
             FacebookApi.callSendAPI(sender_psid, response);
             // hide the typing indicator
             if(index === responses.length - 1) senderActions(sender_psid, "typing_off");
-            ++delay;
+            delay += 1;
         }, delay * 2000 );
     }
 };
