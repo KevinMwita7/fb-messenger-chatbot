@@ -12,9 +12,9 @@ module.exports = class Handler {
         let response;
 
         // mark the last message as read
-        senderAction(user.id, "mark_seen");
+        // senderAction(user.id, "mark_seen");
         // show typing indicator
-        senderAction(user.id, "typing_on");
+        // senderAction(user.id, "typing_on");
 
         if (received_message.text) {
           // handle quick replies separately
@@ -48,8 +48,9 @@ module.exports = class Handler {
                 responses.push(response);
             }
         }
+        console.log(responses);
         // Sends the response message
-        FacebookApi.callSendAPI(user.id, responses, 0);
+        // FacebookApi.callSendAPI(user.id, responses, 0);
     }
 
     handlePostback(user, received_postback) {
