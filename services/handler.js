@@ -4,6 +4,7 @@ const botResponses = require("../fixtures/bot-responses.js");
 const FacebookApi = require("./api");
 const senderAction = require("./sender-actions");
 const templateButtons =  require("../fixtures/buttons");
+const sendMessages = require("../utils/send-messages");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -49,7 +50,8 @@ module.exports = class Handler {
             }
         }
         console.log(responses);
-        // Sends the response message
+        // Sends the response messages
+        sendMessages(user.id, responses);
         // FacebookApi.callSendAPI(user.id, responses);
     }
 
@@ -80,6 +82,7 @@ module.exports = class Handler {
                     break;
             }
             // FacebookApi.callSendAPI(user.id, responses);
+            sendMessages(user.id, responses);
             console.log(responses);
         } catch(e) {
             // console.log(e);
