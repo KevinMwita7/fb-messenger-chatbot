@@ -13,9 +13,9 @@ module.exports = class Handler {
         let response;
 
         // mark the last message as read
-        // senderAction(user.id, "mark_seen");
+        senderAction(user.id, "mark_seen");
         // show typing indicator
-        // senderAction(user.id, "typing_on");
+        senderAction(user.id, "typing_on");
 
         if (received_message.text) {
           // handle quick replies separately
@@ -51,7 +51,7 @@ module.exports = class Handler {
         }
         console.log(responses);
         // Sends the response messages
-        sendMessages(user.id, responses);
+        // sendMessages(user.id, responses);
         // FacebookApi.callSendAPI(user.id, responses);
     }
 
