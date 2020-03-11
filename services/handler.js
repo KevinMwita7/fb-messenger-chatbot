@@ -49,8 +49,9 @@ module.exports = class Handler {
                 responses.push(response);
             }
         }
+        console.log(responses);
         // Sends the response messages
-        sendMessages(user.id, responses);
+        // sendMessages(user.id, responses);
         // FacebookApi.callSendAPI(user.id, responses);
     }
 
