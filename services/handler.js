@@ -49,7 +49,7 @@ module.exports = class Handler {
                 responses.push(response);
             }
         }
-        console.log(responses);
+        console.log(responses[0].attachment.payload);
         // Sends the response messages
         // sendMessages(user.id, responses);
         // FacebookApi.callSendAPI(user.id, responses);
