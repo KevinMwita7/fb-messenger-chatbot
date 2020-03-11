@@ -15,6 +15,7 @@ module.exports = class FacebookApi {
             },
             data: request_body
         }).then(res => {
+            console.log(res.data);
             console.log("Message successfully sent");
         }).catch(error => {
            // console.log("Message not sent", error);
