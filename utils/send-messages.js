@@ -12,5 +12,8 @@ module.exports = function sendMessages(sender_psid, responses) {
             }, delay * 2000);
             delay += 1;
         });
+    } else {
+        FacebookApi.callSendAPI(sender_psid, response);
+        senderActions(sender_psid, "typing_off");
     }
 };
