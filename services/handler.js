@@ -8,6 +8,7 @@ const templateButtons =  require("../fixtures/buttons");
 module.exports = class Handler {
     handleMessage(user, received_message) {
         let response;
+        console.log(received_message);
         if (received_message.text) {
           // handle quick replies separately
           if(received_message.quick_reply) {
