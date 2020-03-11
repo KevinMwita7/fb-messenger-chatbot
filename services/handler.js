@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 const ResponseGenerator = require("./response-generator"); 
-const responses = require("../fixtures/responses.js");
+const botResponses = require("../fixtures/bot-responses.js");
 const FacebookApi = require("./api");
 const senderAction = require("./sender-actions");
 const templateButtons =  require("../fixtures/buttons");
@@ -66,10 +66,10 @@ module.exports = class Handler {
             // Set the response based on the postback payload
             switch(payload) {
                 case "get_started":
-                    let text = responses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
+                    let text = botResponses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                    
-                    response =  ResponseGenerator.generateQuickReply(responses.get_started.start.text, undefined, [
+                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
                         {title: "Application", payload: "application"},
                         {title: "Programs", payload: "programs"},
                         {title: "Costs", payload:"cost"},
@@ -85,17 +85,17 @@ module.exports = class Handler {
     }
 
     handleQuickReply(received_message) {
-        let response;
+        let response, quickReplyPayload = received_message.quick_reply.payload;
         // Create the payload for a basic text message
-        switch(received_message.quick_reply.payload) {
+        switch(quickReplyPayload) {
             case "faq":
                 // generate the frequently asked questions template
-                let payload = {
-                    title: responses.faq.title.text,
-                    subtitle: responses.faq.subtitle.text,
+                let responsePayload = {
+                    title: botResponses.faq.title.text,
+                    subtitle: botResponses.faq.subtitle.text,
                     buttons: templateButtons.buttons.faq
                 };
-                response = ResponseGenerator.generateGenericTemplate(payload);
+                response = ResponseGenerator.generateGenericTemplate(responsePayload);
                 break;
         }
         return response;

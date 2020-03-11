@@ -5,6 +5,7 @@ const senderAction = require("./sender-actions");
 // interface class to house all functions requesting data from facebook
 module.exports = class FacebookApi {
     static callSendAPI(sender_psid, responses, messageDelay = 0) {
+        let delay = messageDelay;
         console.log(response);
         // given an array of messages build a request for each of them and send them two seconds apart
         if(Array.isArray(responses)) {
@@ -26,8 +27,8 @@ module.exports = class FacebookApi {
                     });
                     // if it is the last message, hide the typing indicator
                     if(index === responses.length - 1) senderAction(sender_psid, "typing_off");
-                }, messageDelay);
-                messageDelay += 2;
+                }, delay);
+                delay += 2;
             });
         } else throw new Error("callSendAPI expects an array of responses as its second argument");
     }
