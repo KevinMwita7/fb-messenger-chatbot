@@ -8,23 +8,12 @@ const templateButtons =  require("../fixtures/buttons");
 module.exports = class Handler {
     handleMessage(user, received_message) {
         let response;
-        if (received_message.text) {    
-          // Create the payload for a basic text message
-          switch(received_message.text) {
-            case "faq":
-                // mark the last message as read
-                senderAction(user.id, "mark_seen");
-                // show typing indicator
-                senderAction(user.id, "typing_on");
-                // generate the frequently asked questions template
-                let payload = {
-                    title: responses.faq.title.text,
-                    subtitle: responses.faq.subtitle.text,
-                    buttons: templateButtons.buttons.faq
-                };
-                response = ResponseGenerator.generateGenericTemplate(payload);
-                console.log(response);
-                break;
+        if (received_message.text) {
+          // handle quick replies separately
+          if(received_message.quick_reply) {
+              this.handleQuickReply(user.id, received_message);
+          } else {
+              // handle the messages entered into the input box
           }
         }  else if(received_message.attachments) {
             for(let attachment of received_message.attachments) {
@@ -85,5 +74,27 @@ module.exports = class Handler {
         } catch(e) {
             console.log(e);
         }
+    }
+
+    handleQuickReply(sender_psid, received_message) {
+        let response;
+        // Create the payload for a basic text message
+        switch(received_message.quick_reply.payload) {
+            case "faq":
+                // mark the last message as read
+                senderAction(user.id, "mark_seen");
+                // show typing indicator
+                senderAction(user.id, "typing_on");
+                // generate the frequently asked questions template
+                let payload = {
+                    title: responses.faq.title.text,
+                    subtitle: responses.faq.subtitle.text,
+                    buttons: templateButtons.buttons.faq
+                };
+                response = ResponseGenerator.generateGenericTemplate(payload);
+                console.log(response);
+                break;
+        }
+        FacebookApi.callSendAPI(sender_psid, response);
     }
 };
