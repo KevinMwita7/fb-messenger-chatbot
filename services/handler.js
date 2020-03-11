@@ -23,6 +23,7 @@ module.exports = class Handler {
                     buttons: templateButtons.buttons.faq
                 };
                 response = ResponseGenerator.generateGenericTemplate(payload);
+                console.log(response);
                 break;
           }
         }  else if(received_message.attachments) {
