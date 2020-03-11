@@ -7,7 +7,7 @@ module.exports = class FacebookApi {
     static callSendAPI(sender_psid, response) {
         // given an array of messages build a request for each of them and send them two seconds apart
         let request_body = {"recipient": {"id": sender_psid}, "message": response};
-        console.log(request_body)
+        console.log(request_body.message.attachment.payload)
         axios({
             method: "post",
             url: GRAPH_API_MESSAGES_URL,
