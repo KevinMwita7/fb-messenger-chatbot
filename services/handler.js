@@ -1,7 +1,6 @@
 const axios = require("axios").default;
 const ResponseGenerator = require("./response-generator"); 
 const botResponses = require("../fixtures/bot-responses.js");
-const FacebookApi = require("./api");
 const senderAction = require("./sender-actions");
 const templateButtons =  require("../fixtures/buttons");
 const sendMessages = require("../utils/send-messages");
@@ -49,9 +48,8 @@ module.exports = class Handler {
                 responses.push(response);
             }
         }
-        console.log(responses[0].attachment.payload);
         // Sends the response messages
-        // sendMessages(user.id, responses);
+        sendMessages(user.id, responses);
         // FacebookApi.callSendAPI(user.id, responses);
     }
 
