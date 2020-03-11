@@ -5,6 +5,7 @@ const senderAction = require("./sender-actions");
 // interface class to house all functions requesting data from facebook
 module.exports = class FacebookApi {
     static callSendAPI(sender_psid, responses, messageDelay = 0) {
+        console.log(response);
         // given an array of messages build a request for each of them and send them two seconds apart
         if(Array.isArray(responses)) {
             responses.forEach((response, index) => {
@@ -21,7 +22,7 @@ module.exports = class FacebookApi {
                     }).then(res => {
                         console.log("Message successfully sent");
                     }).catch(error => {
-                        console.log("Message not sent", error);
+                        // console.log("Message not sent", error);
                     });
                     // if it is the last message, hide the typing indicator
                     if(index === responses.length - 1) senderAction(sender_psid, "typing_off");

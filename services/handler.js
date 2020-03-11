@@ -49,7 +49,7 @@ module.exports = class Handler {
             }
         }
         // Sends the response message
-        FacebookApi.callSendAPI(user.id, responses);
+        FacebookApi.callSendAPI(user.id, responses, 0);
     }
 
     handlePostback(user, received_postback) {
