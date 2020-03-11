@@ -6,10 +6,10 @@ const senderAction = require("./sender-actions");
 module.exports = class FacebookApi {
     static callSendAPI(sender_psid, responses, messageDelay = 0) {
         let delay = messageDelay;
-        console.log(response);
+        console.log(responses);
         // given an array of messages build a request for each of them and send them two seconds apart
         if(Array.isArray(responses)) {
-            responses.forEach((response, index) => {
+           /* responses.forEach((response, index) => {
                 setTimeout(() => {
                     // Construct the message body
                     let request_body = {"recipient": {"id": sender_psid}, "message": response};
@@ -29,7 +29,7 @@ module.exports = class FacebookApi {
                     if(index === responses.length - 1) senderAction(sender_psid, "typing_off");
                 }, delay);
                 delay += 2;
-            });
+            });*/
         } else throw new Error("callSendAPI expects an array of responses as its second argument");
     }
 
