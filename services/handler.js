@@ -19,8 +19,7 @@ module.exports = class Handler {
         if (received_message.text) {
           // handle quick replies separately
           if(received_message.quick_reply) {
-              response = this.handleQuickReply(received_message);
-              responses.push(response);
+              responses = this.handleQuickReply(received_message);
           } else {
               // handle the messages entered into the input box
           }
@@ -96,6 +95,7 @@ module.exports = class Handler {
             case "application":
                 responses.push(ResponseGenerator.generateText(botResponses.application.lead));
                 response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.application);
+                responses.push(response);
                 break;
             case "cost_to_attend":
                 responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
