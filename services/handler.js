@@ -136,7 +136,8 @@ module.exports = class Handler {
                             ResponseGenerator.generatePostbackButton("Learn more", "program_learn_more")
                         ]
                     };
-                    response = ResponseGenerator.generateGenericTemplate({});
+                    response = ResponseGenerator.generateGenericTemplate(carouselItem);
+                    responses.push(response);
                 });
                 break;
         }
