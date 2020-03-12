@@ -86,10 +86,21 @@ module.exports = class Handler {
     }
 
     handleQuickReply(received_message) {
-        let response, quickReplyPayload = received_message.quick_reply.payload;
+        let response, 
+        responses = [],
+        quickReplyPayload = received_message.quick_reply.payload;
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
-            
+            case "about_us":
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us.text, undefined, [
+                    {title: "Enrollement", payload: "enrollment"},
+                    {title: "Location", payload: "location"},
+                    {title: "Programs", payload: "programs"},
+                    {title: "Advice", payload: "advice"},
+                    {title: "Have more questions?", payload: "more_questions"}
+                ]);
+                responses.push(response);
+                break;
         }
         return response;
     }
