@@ -50,7 +50,6 @@ module.exports = class Handler {
         }
         // Sends the response messages
         sendMessages(user.id, responses);
-        // FacebookApi.callSendAPI(user.id, responses);
     }
 
     handlePostback(user, received_postback) {
@@ -73,16 +72,14 @@ module.exports = class Handler {
                     response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
                         {title: "Application", payload: "application"},
                         {title: "Programs", payload: "programs"},
-                        {title: "Costs", payload:"cost"},
-                        {title: "FAQ", payload:"faq"}
+                        {title: "Costs", payload:"cost"}
                     ]);
                     responses.push(response);
                     break;
             }
-            // FacebookApi.callSendAPI(user.id, responses);
             sendMessages(user.id, responses);
         } catch(e) {
-            // console.log(e);
+            console.log(e);
         }
     }
 

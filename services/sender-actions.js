@@ -18,8 +18,8 @@ module.exports  = function senderAction(sender_psid, type) {
     };
     axios(options)
     .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
     }).catch(error => {
-        // console.log("Error while sending sender_action", error);
+        console.log("Error while sending sender_action", error);
     });
 };
