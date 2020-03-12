@@ -108,6 +108,7 @@ module.exports = class Handler {
             case "certificates":
                 responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
                 response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
+                responses.push(response);
                 break;
         }
         return responses;
