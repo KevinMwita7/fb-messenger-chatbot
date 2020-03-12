@@ -22,5 +22,12 @@ module.exports = {
     },
     application: {
         lead: "I understand how hard the application process can be. I will try and make it easier."
+    },
+    cost_to_attend: {
+        plans: "There are three plans to pick from: monthly, annual and premium.",
+        monthly: "For the monthly plan, you will pay a monthly fee of $29 and gain access to all courses and assessments.",
+        annualy: "For the annual plan, you will pay a yealy fee of $299 and gain access to all courses and assessments.",
+        premium: "For the premium plan, you will pay a monthly fee of $499 and in addition to all courses and assessments, gain access to certification practice exams, interactive courses and projects",
+        financial_aid: "I understand it may be a challenge for you to have the funds listed above. Unfortunately, we do not offer any form of financial aid. However, you can get a trial period of 30 days before paying for the full course. To learn more visit https://remote-university-website-hdihgi6s6.now.sh"
     }
 };
