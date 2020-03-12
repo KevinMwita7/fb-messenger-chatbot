@@ -21,6 +21,6 @@ module.exports = {
         certificates_follow_up: "Upon completion of a course, a certificate is automatically generated that can be viewed online and shared."
     },
     application: {
-        lead: "Master the skills you need to pass IT certification exams with unlimited access to industry-leading practice tests."
+        lead: "I understand how hard the application process can be. I will try and make it easier."
     }
 };
