@@ -93,11 +93,11 @@ module.exports = class Handler {
         switch(quickReplyPayload) {
             case "about_us":
                 response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us.text, undefined, [
-                    {title: "Enrollement", payload: "enrollment"},
+                    {title: "Enrollment", payload: "enrollment"},
                     {title: "Location", payload: "location"},
                     {title: "Programs", payload: "programs"},
                     {title: "Advice", payload: "advice"},
-                    {title: "Have more questions?", payload: "more_questions"}
+                    {title: "Talk to an agent", payload: "talk_to_agent"}
                 ]);
                 responses.push(response);
                 break;
