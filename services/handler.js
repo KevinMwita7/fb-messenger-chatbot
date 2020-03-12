@@ -69,9 +69,7 @@ module.exports = class Handler {
                     let text = botResponses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                 
-                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
-                        templateButtons.buttons.fallback
-                    ]);
+                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, templateButtons.buttons.fallback);
                     responses.push(response);
                     break;
             }
