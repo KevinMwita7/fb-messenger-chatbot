@@ -106,6 +106,6 @@ module.exports = class Handler {
                 responses.push(ResponseGenerator.generateText(botResponses.general.talk_to_agent));
                 break;
         }
-        return response;
+        return responses;
     }
 };
