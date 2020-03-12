@@ -74,7 +74,7 @@ module.exports = class Handler {
                         {title: "Application", payload: "application"},
                         {title: "Programs", payload: "programs"},
                         {title: "Costs", payload:"cost"},
-                        {title: "Frequently Asked Questions", payload:"faq"}
+                        {title: "FAQ", payload:"faq"}
                     ]);
                     responses.push(response);
                     break;
