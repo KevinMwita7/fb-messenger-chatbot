@@ -17,8 +17,8 @@ module.exports = {
     },
     faq: {
         about_us: "Remote University is an online platform that aims to enable individuals learn the skills they need, to land the jobs they want so as to build the lives they deserve. Founded in 2020, our mission is to power careers through tech education. We partner with leading technology companies to learn how technology is transforming industries, and teach the critical tech skills that companies are looking for in their workforce. To learn more, visit us at https://remote-university-website-hdihgi6s6.now.sh",
-        certificates_lead: "Remote University Certificates of Completion are certifications you earn for the courses you have completely watched on our platform. Upon completion of a course, a certificate is automatically generated that can be viewed online and shared.",
-        certificates_follow_up: "We suggest that members send either copies of their Certificates of Completion or a link to their Certificates of Completion to potential clients, employers, colleagues, or friends to share more about their professional education, skills, and interests."
+        certificates_lead: "Remote University Certificates of Completion are certifications you earn for the courses you have completely watched on our platform.",
+        certificates_follow_up: "Upon completion of a course, a certificate is automatically generated that can be viewed online and shared."
     },
     application: {
         lead: "Master the skills you need to pass IT certification exams with unlimited access to industry-leading practice tests."
