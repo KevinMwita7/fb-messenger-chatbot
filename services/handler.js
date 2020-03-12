@@ -20,6 +20,7 @@ module.exports = class Handler {
           // handle quick replies separately
           if(received_message.quick_reply) {
               response = this.handleQuickReply(received_message);
+              console.log("handle quick reply", response);
               responses.push(response);
           } else {
               // handle the messages entered into the input box
