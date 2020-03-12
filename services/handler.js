@@ -97,6 +97,14 @@ module.exports = class Handler {
                 responses.push(ResponseGenerator.generateText(botResponses.application.lead));
                 response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.application);
                 break;
+            case "cost_to_attend":
+                responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
+                responses.push(response);
+                break;
+            case "talk_to_agent":
+                responses.push(ResponseGenerator.generateText(botResponses.general.talk_to_agent));
+                break;
         }
         return response;
     }
