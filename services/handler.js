@@ -97,17 +97,21 @@ module.exports = class Handler {
                 response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.application);
                 responses.push(response);
                 break;
-            case "cost_to_attend":
-                responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
-                responses.push(response);
-                break;
             case "talk_to_agent":
                 responses.push(ResponseGenerator.generateText(botResponses.general.talk_to_agent));
                 break;
             case "certificates":
                 responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
                 response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
+                responses.push(response);
+                break;
+            case "cost_to_attend":
+                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.plans));
+                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.monthly));
+                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.annualy));
+                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.premium));
+                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.financial_aid));
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
                 responses.push(response);
                 break;
         }
