@@ -105,6 +105,10 @@ module.exports = class Handler {
             case "talk_to_agent":
                 responses.push(ResponseGenerator.generateText(botResponses.general.talk_to_agent));
                 break;
+            case "certificates":
+                responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
+                break;
         }
         return responses;
     }
