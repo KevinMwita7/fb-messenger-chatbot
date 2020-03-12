@@ -114,6 +114,11 @@ module.exports = class Handler {
                 response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
                 responses.push(response);
                 break;
+            case "transfer_credit":
+                responses.push(ResponseGenerator.generateText(botResponses.transfer_credits.possibility));
+                break;
+            case "location":
+                responses.push(ResponseGenerator.generateText(botResponses.location));
         }
         return responses;
     }
