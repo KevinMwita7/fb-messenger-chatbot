@@ -66,10 +66,10 @@ module.exports = class Handler {
             // Set the response based on the postback payload
             switch(payload) {
                 case "get_started":
-                    let text = botResponses.get_started.greetings.text.replace("{{user_first_name}}", user.first_name);
+                    let text = botResponses.get_started.greetings.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                 
-                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, templateButtons.buttons.fallback);
+                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start, undefined, templateButtons.buttons.fallback);
                     responses.push(response);
                     break;
             }
@@ -86,12 +86,16 @@ module.exports = class Handler {
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
             case "about_us":
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us.text, undefined, templateButtons.buttons.fallback);
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us, undefined, templateButtons.buttons.fallback);
                 responses.push(response);
                 break;
             case "enrollment":
-                response = ResponseGenerator.generateQuickReply(botResponses.choose_option.text, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
                 responses.push(response);
+                break;
+            case "application":
+                responses.push(ResponseGenerator.generateText(botResponses.application.lead));
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.application);
                 break;
         }
         return response;

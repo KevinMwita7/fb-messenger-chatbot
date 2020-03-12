@@ -12,6 +12,11 @@ module.exports = {
             {title: "Transferring credit", payload: "transfer_credit"},
             {title: "Location", payload: "location"},
             {title: "Talk to an agent", payload: "talk_to_agent"}
+        ],
+        application: [
+            {title: "Eligibility and Requirements", payload: "eligibility"},
+            {title: "Admissions", payload: "admissions"},
+            {title: "Talk to an agent", payload: "talk_to_agent"}
         ]
     }
 };
