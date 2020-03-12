@@ -29,5 +29,9 @@ module.exports = {
         annualy: "For the annual plan, you will pay a yealy fee of $299 and gain access to all courses and assessments.",
         premium: "For the premium plan, you will pay a monthly fee of $499 and in addition to all courses and assessments, gain access to certification practice exams, interactive courses and projects",
         financial_aid: "I understand it may be a challenge for you to have the funds listed above. Unfortunately, we do not offer any form of financial aid. However, you can get a trial period of 30 days before paying for the full course. To learn more visit https://remote-university-website-hdihgi6s6.now.sh"
-    }
+    },
+    transfer_credits: {
+        possibility: "Unfortunately, Remote University does not offer credits for any course work covered."
+    },
+    location: "Remote university has no physical campuses. All courses are accessed through the internet from wherever you feel comfortable."
 };
