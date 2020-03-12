@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const ResponseGenerator = require("./response-generator"); 
+const ResponseGenerator = require("../utils/response-generator"); 
 const botResponses = require("../fixtures/bot-responses.js");
 const senderAction = require("./sender-actions");
 const templateButtons =  require("../fixtures/buttons");
