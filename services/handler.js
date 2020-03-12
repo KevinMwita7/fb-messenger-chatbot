@@ -116,12 +116,12 @@ module.exports = class Handler {
                 break;
             case "transfer_credit":
                 responses.push(ResponseGenerator.generateText(botResponses.transfer_credits.possibility));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.fallback);
                 responses.push(response);
                 break;
             case "location":
                 responses.push(ResponseGenerator.generateText(botResponses.location));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.fallback);
                 responses.push(response);
                 break;
         }
