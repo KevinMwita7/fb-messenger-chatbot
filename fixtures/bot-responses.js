@@ -6,6 +6,9 @@ module.exports = {
             text: "How may I help you?"
         }
     },
+    choose_option: {
+        text: "Please write your question or choose one of the options below to get help with."
+    },
     programs : {
         all: {
             text: "At the moment we offer the courses below with much more coming soon. Please choose one to learn more."
@@ -32,8 +35,6 @@ module.exports = {
         },
     },
     enrollment: {
-        root: {
-            text: "Please choose how to continue."
-        }
+        
     }
 };
