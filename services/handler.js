@@ -70,9 +70,11 @@ module.exports = class Handler {
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                 
                     response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
-                        {title: "Application", payload: "application"},
+                        {title: "About us", payload: "about_us"},
+                        {title: "Cost", payload:"cost"},
                         {title: "Programs", payload: "programs"},
-                        {title: "Costs", payload:"cost"}
+                        {title: "Application", payload: "application"},
+                        {title: "Location", payload: "location"}
                     ]);
                     responses.push(response);
                     break;
@@ -87,15 +89,7 @@ module.exports = class Handler {
         let response, quickReplyPayload = received_message.quick_reply.payload;
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
-            case "faq":
-                // generate the frequently asked questions template
-                let responsePayload = {
-                    title: botResponses.faq.title.text,
-                    subtitle: botResponses.faq.subtitle.text,
-                    buttons: templateButtons.buttons.faq
-                };
-                response = ResponseGenerator.generateGenericTemplate(responsePayload);
-                break;
+            
         }
         return response;
     }
