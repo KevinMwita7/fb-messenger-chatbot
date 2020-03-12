@@ -70,11 +70,7 @@ module.exports = class Handler {
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                 
                     response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start.text, undefined, [
-                        {title: "About us", payload: "about_us"},
-                        {title: "Cost", payload:"cost"},
-                        {title: "Programs", payload: "programs"},
-                        {title: "Application", payload: "application"},
-                        {title: "Location", payload: "location"}
+                        templateButtons.buttons.fallback
                     ]);
                     responses.push(response);
                     break;
@@ -92,14 +88,11 @@ module.exports = class Handler {
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
             case "about_us":
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us.text, undefined, [
-                    {title: "Enrollment", payload: "enrollment"},
-                    {title: "Location", payload: "location"},
-                    {title: "Programs", payload: "programs"},
-                    {title: "Advice", payload: "advice"},
-                    {title: "Talk to an agent", payload: "talk_to_agent"}
-                ]);
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us.text, undefined, templateButtons.buttons.fallback);
                 responses.push(response);
+                break;
+            case "enrollment":
+                response = ResponseGenerator.generateGenericTemplate(botResponses.enrollment.root.text, undefined, templateButtons.buttons.enrollment);
                 break;
         }
         return response;

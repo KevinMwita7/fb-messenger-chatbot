@@ -3,7 +3,7 @@ module.exports = {
         greetings: {
             text: "Hello {{user_first_name}}. I am Julia, your Remote University Digital Assistant."
         }, start: {
-            text: "Please write your question or choose one of the options below to get started."
+            text: "How may I help you?"
         }
     },
     programs : {
@@ -29,6 +29,11 @@ module.exports = {
     faq: {
         about_us: {
             text: "Remote University is an online platform that aims to enable individuals learn the skills they need, to land the jobs they want so as to build the lives they deserve. Founded in 2020, our mission is to power careers through tech education. We partner with leading technology companies to learn how technology is transforming industries, and teach the critical tech skills that companies are looking for in their workforce. With our powerful and flexible digital education platform, even the busiest learners can prepare themselves to take on the most in-demand tech roles. Remote University believes in offering the best and our instructors are a testament to that. They are passionate about sharing their knowledge and helping their students. They are experts who stay active in their fields in order to deliver the most up-to-date content."
+        },
+    },
+    enrollment: {
+        root: {
+            text: "Please choose how to continue."
         }
     }
 };
