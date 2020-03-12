@@ -91,6 +91,7 @@ module.exports = class Handler {
                 break;
             case "enrollment":
                 response = ResponseGenerator.generateGenericTemplate(botResponses.enrollment.root.text, undefined, templateButtons.buttons.enrollment);
+                responses.push(response);
                 break;
         }
         return response;
