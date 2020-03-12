@@ -14,7 +14,8 @@ module.exports = {
             {title: "Talk to an agent", payload: "talk_to_agent"}
         ],
         application: [
-            {title: "Eligibility and Requirements", payload: "eligibility"},
+            {title: "Eligibility", payload: "eligibility"},
+            {title: "Requirements", payload: "requirements"},
             {title: "Admissions", payload: "admissions"},
             {title: "Talk to an agent", payload: "talk_to_agent"}
         ]
