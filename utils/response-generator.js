@@ -57,9 +57,11 @@ module.exports = class ResponseGenerator {
 
     }
 
-    static generatePostbackButton(type, title, payload) {
+    static generatePostbackButton(title, payload) {
       return {
-        type, title, payload
+        type: "postback", 
+        title, 
+        payload
       };
     }
     static generateUrlButton(type, title, url) {

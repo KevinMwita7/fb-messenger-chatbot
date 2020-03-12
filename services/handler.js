@@ -2,7 +2,7 @@ const axios = require("axios").default;
 const ResponseGenerator = require("../utils/response-generator"); 
 const botResponses = require("../fixtures/bot-responses.js");
 const senderAction = require("./sender-actions");
-const templateButtons =  require("../fixtures/buttons");
+const buttons =  require("../fixtures/buttons");
 const sendMessages = require("../utils/send-messages");
 
 module.exports = class Handler {
@@ -68,7 +68,7 @@ module.exports = class Handler {
                     let text = botResponses.get_started.greetings.replace("{{user_first_name}}", user.first_name);
                     response = ResponseGenerator.generateText(text);
                     responses.push(response);                 
-                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start, undefined, templateButtons.buttons.fallback);
+                    response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start, undefined, buttons.quick_reply_buttons.fallback);
                     responses.push(response);
                     break;
             }
@@ -85,16 +85,16 @@ module.exports = class Handler {
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
             case "about_us":
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us, undefined, templateButtons.buttons.fallback);
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us, undefined, buttons.quick_reply_buttons.fallback);
                 responses.push(response);
                 break;
             case "enrollment":
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.enrollment);
                 responses.push(response);
                 break;
             case "application":
                 responses.push(ResponseGenerator.generateText(botResponses.application.lead));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.application);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.application);
                 responses.push(response);
                 break;
             case "talk_to_agent":
@@ -102,7 +102,7 @@ module.exports = class Handler {
                 break;
             case "certificates":
                 responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, templateButtons.buttons.fallback);
+                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, buttons.quick_reply_buttons.fallback);
                 responses.push(response);
                 break;
             case "cost_to_attend":
@@ -111,18 +111,33 @@ module.exports = class Handler {
                 responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.annualy));
                 responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.premium));
                 responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.financial_aid));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.enrollment);
                 responses.push(response);
                 break;
             case "transfer_credit":
                 responses.push(ResponseGenerator.generateText(botResponses.transfer_credits.possibility));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.fallback);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
                 responses.push(response);
                 break;
             case "location":
                 responses.push(ResponseGenerator.generateText(botResponses.location));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, templateButtons.buttons.fallback);
+                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
                 responses.push(response);
+                break;
+            case "programs":
+                // loop through each program generating a template for it for the carousel
+                buttons.template_buttons.programs.apply_now.forEach(value => {
+                    let carouselItem = {
+                        image_url: undefined,
+                        title: value.title,
+                        subtitle: undefined,
+                        buttons: [
+                            ResponseGenerator.generatePostbackButton("Apply now", value.payload),
+                            ResponseGenerator.generatePostbackButton("Learn more", "program_learn_more")
+                        ]
+                    };
+                    response = ResponseGenerator.generateGenericTemplate({});
+                });
                 break;
         }
         return responses;
