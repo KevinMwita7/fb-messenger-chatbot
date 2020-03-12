@@ -90,7 +90,7 @@ module.exports = class Handler {
                 responses.push(response);
                 break;
             case "enrollment":
-                response = ResponseGenerator.generateGenericTemplate(botResponses.enrollment.root.text, undefined, templateButtons.buttons.enrollment);
+                response = ResponseGenerator.generateQuickReply(botResponses.enrollment.root.text, undefined, templateButtons.buttons.enrollment);
                 responses.push(response);
                 break;
         }

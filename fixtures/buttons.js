@@ -3,6 +3,7 @@ module.exports = {
         fallback: [
             {title: "About us", payload: "about_us"},
             {title: "Enrollment", payload: "enrollment"},
+            {title: "Certificates", payload: "certificates"},
             {title: "Talk to an agent", payload: "talk_to_agent"}
         ],
         enrollment: [
