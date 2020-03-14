@@ -24,11 +24,10 @@ module.exports = {
     template_buttons: {
         programs: {
             apply_now: [
-                {title: "Artificial Intelligence", payload: "artificial_intelligence"},
-                {title: "Data Science", payload: "data_science"},
-                {title: "Cloud Computing", payload: "cloud_computing"},
-                {title: "Web Development", payload: "web_development"},
-                {title: "Programming", payload: "programming"},
+                {title: "Artificial Intelligence", payload: "artificial_intelligence", image_url: "https://cdn.pixabay.com/photo/2017/04/13/20/26/artificial-intelligence-2228610_1280.jpg"},
+                {title: "Data Science", payload: "data_science", image_url: "https://cdn.pixabay.com/photo/2017/01/05/11/57/database-1954920_1280.jpg"},
+                {title: "Cloud Computing", payload: "cloud_computing", image_url: "https://cdn.pixabay.com/photo/2017/01/22/22/11/cloud-computing-2001090_1280.jpg"},
+                {title: "Programming", payload: "programming", image_url: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png"},
             ]
         }
     }

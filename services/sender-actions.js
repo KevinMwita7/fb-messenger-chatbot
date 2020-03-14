@@ -1,5 +1,6 @@
 const axios = require("axios").default;
 const { GRAPH_API_MESSAGES_URL } = require('../utils/constants');
+const { PAGE_ACCESS_TOKEN } = require("../config");
 
 // sender action relays the bot is taking to the user e.g typing indicator while generating response
 module.exports  = function senderAction(sender_psid, type) {
@@ -7,7 +8,7 @@ module.exports  = function senderAction(sender_psid, type) {
         method: "post",
         url: GRAPH_API_MESSAGES_URL,
         params: {
-            access_token: process.env.PAGE_ACCESS_TOKEN
+            access_token: PAGE_ACCESS_TOKEN
         },
         data: {
             "recipient": {

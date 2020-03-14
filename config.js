@@ -6,5 +6,6 @@ dotenv.config();
 module.exports = {
     PORT: process.env.PORT,
     ENVIRONMENT: process.env.NODE_ENV,
-    VERIFICATION_TOKEN: process.env.VERIFICATION_TOKEN
+    VERIFICATION_TOKEN: process.env.VERIFICATION_TOKEN,
+    PAGE_ACCESS_TOKEN: process.env.PAGE_ACCESS_TOKEN
 };

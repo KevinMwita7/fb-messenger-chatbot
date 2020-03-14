@@ -125,10 +125,12 @@ module.exports = class Handler {
                 responses.push(response);
                 break;
             case "programs":
+                // a variable to hold the carousel's generic templates 
+                let payloadElements = [];
                 // loop through each program generating a template for it for the carousel
                 buttons.template_buttons.programs.apply_now.forEach(value => {
                     let carouselItem = {
-                        image_url: undefined,
+                        image_url: value.image_url,
                         title: value.title,
                         subtitle: undefined,
                         buttons: [
@@ -136,9 +138,10 @@ module.exports = class Handler {
                             ResponseGenerator.generatePostbackButton("Learn more", "program_learn_more")
                         ]
                     };
-                    response = ResponseGenerator.generateGenericTemplate(carouselItem);
-                    responses.push(response);
+                    payloadElements.push(carouselItem);
                 });
+                response = ResponseGenerator.generateCarouselTemplate(payloadElements);
+                responses.push(response);
                 break;
         }
         return responses;

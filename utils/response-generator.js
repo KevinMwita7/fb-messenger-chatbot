@@ -49,6 +49,18 @@ module.exports = class ResponseGenerator {
           };
     }
 
+    static generateCarouselTemplate(generic_templates) {
+      return {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: JSON.stringify(generic_templates)
+          }
+        }
+      };
+    }
+
     static generateImageTemplate() {
         
     }

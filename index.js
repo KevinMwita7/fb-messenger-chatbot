@@ -6,11 +6,12 @@ compression = require("compression"),
 cors = require("cors"),
 Handler = require("./services/handler"),
 FacebookApi = require("./services/api");
+const { PORT, VERIFICATION_TOKEN } = require("./config");
 
 const app = express();
 
 // set the port app will listen on
-app.set("port", process.env.PORT);
+app.set("port", PORT);
 
 // register middlewares
 app.use(cors());
@@ -32,7 +33,7 @@ app.get('/webhook', (req, res) => {
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
       // Checks the mode and token sent is correct
-      if (mode === 'subscribe' && token === process.env.VERIFICATION_TOKEN) {
+      if (mode === 'subscribe' && token === VERIFICATION_TOKEN) {
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
         res.status(200).send(challenge);
