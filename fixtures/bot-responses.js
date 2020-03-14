@@ -16,7 +16,7 @@ module.exports = {
         web_development: "Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the color, font, layout, and more!"
     },
     faq: {
-        about_us: "Remote University is an online platform that aims to enable individuals learn the skills they need, to land the jobs they want so as to build the lives they deserve. Founded in 2020, our mission is to power careers through tech education. We partner with leading technology companies to learn how technology is transforming industries, and teach the critical tech skills that companies are looking for in their workforce. To learn more, visit us at https://remote-university-website-hdihgi6s6.now.sh",
+        about_us: "Remote University is an online platform that aims to enable individuals learn the skills they need, to land the jobs they want so as to build the lives they deserve. Founded in 2020, our mission is to power careers through tech education. We partner with leading technology companies to learn how technology is transforming industries, and teach the critical tech skills that companies are looking for in their workforce. To learn more, visit us at https://remote-university-website-2.now.sh/about",
         certificates_lead: "Remote University Certificates of Completion are certifications you earn for the courses you have completely watched on our platform.",
         certificates_follow_up: "Upon completion of a course, a certificate is automatically generated that can be viewed online and shared."
     },

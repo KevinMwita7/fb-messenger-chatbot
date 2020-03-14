@@ -134,8 +134,8 @@ module.exports = class Handler {
                         title: value.title,
                         subtitle: undefined,
                         buttons: [
-                            ResponseGenerator.generatePostbackButton("Apply now", value.payload),
-                            ResponseGenerator.generatePostbackButton("Learn more", "program_learn_more")
+                            ResponseGenerator.generateUrlButton("Apply now", "apply_now"),
+                            ResponseGenerator.generatePostbackButton("Learn more", value.web_url)
                         ]
                     };
                     payloadElements.push(carouselItem);

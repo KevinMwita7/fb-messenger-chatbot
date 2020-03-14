@@ -76,7 +76,7 @@ module.exports = class ResponseGenerator {
         payload
       };
     }
-    static generateUrlButton(type, title, url) {
+    static generateUrlButton(title, url) {
       return {
         type: "web_url",
         url,
