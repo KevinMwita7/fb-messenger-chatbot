@@ -12,7 +12,7 @@ module.exports = class FacebookApi {
             method: "post",
             url: GRAPH_API_MESSAGES_URL,
             params: {
-                access_token: PAGE_ACCESS_TOKEN
+                access_token: process.env.PAGE_ACCESS_TOKEN
             },
             data: request_body
         }).then(res => {
@@ -29,7 +29,7 @@ module.exports = class FacebookApi {
                 method: "get",
                 url: GRAPH_API_BASE_URL + sender_psid,
                 params: {
-                    access_token: PAGE_ACCESS_TOKEN,
+                    access_token: process.env.PAGE_ACCESS_TOKEN,
                     fields: "id, first_name, last_name, profile_pic"
                 }
             };

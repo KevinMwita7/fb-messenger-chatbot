@@ -8,7 +8,7 @@ module.exports  = function senderAction(sender_psid, type) {
         method: "post",
         url: GRAPH_API_MESSAGES_URL,
         params: {
-            access_token: PAGE_ACCESS_TOKEN
+            access_token: process.env.PAGE_ACCESS_TOKEN
         },
         data: {
             "recipient": {
