@@ -16,17 +16,15 @@ module.exports = class Handler {
         senderAction(user.id, "mark_seen");
         // show typing indicator
         senderAction(user.id, "typing_on");
-        
-        let nlpEvent = nlp(received_message.nlp, "about_us");
-        console.log(nlpEvent);
-
         if (received_message.text) {
           // handle quick replies separately
-          if(received_message.quick_reply) {
+          if(received_message.quick_reply && received_message.nlp) {
               responses = this.handleQuickReply(received_message);
           } else {
               // handle the messages enterer in the input box
-              if(nlp(received_message.nlp, "about_us")) {
+              if(nlp(received_message.nlp, "greetings")) {
+                responses = HandlerHelpers.handleAboutUs();
+              } else if(nlp(received_message.nlp, "about_us")) {
                 responses = HandlerHelpers.handleAboutUs();
               } else if(nlp(received_message.nlp, "enroll")) {
                 responses = HandlerHelpers.handleEnrollment();
@@ -103,6 +101,7 @@ module.exports = class Handler {
                     responses.push(response);                 
                     response =  ResponseGenerator.generateQuickReply(botResponses.get_started.start, undefined, buttons.quick_reply_buttons.fallback);
                     responses.push(response);
+                    console.log(response);
                     break;
             }
             sendMessages(user.id, responses);

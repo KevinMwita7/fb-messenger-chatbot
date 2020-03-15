@@ -1,10 +1,25 @@
+const { getRandomResponse } = require("../utils/functions");
+
 module.exports = {
     get_started: {
         greetings: "Hello {{user_first_name}}. I am Julia, your Remote University Digital Assistant.", 
-        start: "How may I help you?"
+        start: "How may I help you?",
+        randomGreeting: () => {
+            let greetings = ["Hello there!", "Hi there!", "Hi, pleasure to meet you!", "Hello, nice to meet you"];
+            return getRandomResponse(greetings);
+        }
     },
     general: {
-        choose_option: "Please write your question or choose one of the options below to get help with.",
+        choose_option: () => {
+            let prompts = [
+                "Please write your question or choose one of the options below.",
+                "How may I help you?",
+                "How may I be of assistance?",
+                "Please select an option.",
+                "Feel free to ask me any question."
+            ];
+            return getRandomResponse(prompts);
+        },
         talk_to_agent: "One of our representatives will get back to you with recommendations about studying at our university."
     },
     programs : {
