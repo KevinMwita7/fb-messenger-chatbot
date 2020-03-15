@@ -1,10 +1,11 @@
-const axios = require("axios").default,
-ResponseGenerator = require("../utils/response-generator"),
+const ResponseGenerator = require("../utils/response-generator"),
 botResponses = require("../fixtures/bot-responses.js"),
+HandlerHelpers = require("../utils/handler-helpers"),
 senderAction = require("./sender-actions"),
 buttons =  require("../fixtures/buttons"),
-sendMessages = require("../utils/send-messages");
-const { REMOTE_UNIVERSITY_APPLY_URL, REMOTE_UNIVERSITY_BASE_URL } = require("../utils/constants");
+sendMessages = require("../utils/send-messages"),
+nlp = require("./nlp");
+const { REMOTE_UNIVERSITY_APPLY_URL } = require("../utils/constants");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -16,13 +17,37 @@ module.exports = class Handler {
         senderAction(user.id, "mark_seen");
         // show typing indicator
         senderAction(user.id, "typing_on");
+        
+        let nlpEvent = nlp(received_message.nlp, "about_us");
+        console.log(nlpEvent);
 
         if (received_message.text) {
           // handle quick replies separately
           if(received_message.quick_reply) {
               responses = this.handleQuickReply(received_message);
           } else {
-              // handle the messages entered into the input box
+              // handle the messages enterer in the input box
+              if(nlp(received_message.nlp, "about_us")) {
+                responses = HandlerHelpers.handleAboutUs();
+              } else if(nlp(received_message.nlp, "enrollment")) {
+                responses = HandlerHelpers.handleEnrollment();
+              } else if(nlp(received_message.nlp, "application")) {
+                responses = HandlerHelpers.handleApplication(); 
+              } else if(nlp(received_message.nlp, "talk_to_agent")) {
+                responses = HandlerHelpers.handleTalkToAgent();
+              } else if(nlp(received_message.nlp, "certicates")) {
+                responses = HandlerHelpers.handleCertificates();
+              } else if(nlp(received_message.nlp, "cost_to_attend")) {
+                  responses = HandlerHelpers.handleCostToAttend();
+              } else if(nlp(received_message.nlp, "transfer_credit")) {
+                  responses = HandlerHelpers.handleTransferCredit();    
+              } else if(nlp(received_message.nlp, "location")) {
+                  responses = HandlerHelpers.handleLocation();
+              } else if(nlp(received_message.nlp, "programs")) {
+                  responses = HandlerHelpers.handlePrograms();    
+              } else {
+                  responses = HandlerHelpers.fallback();
+             }
           }
         }  else if(received_message.attachments) {
             for(let attachment of received_message.attachments) {
@@ -80,71 +105,29 @@ module.exports = class Handler {
     }
 
     handleQuickReply(received_message) {
-        let response, 
-        responses = [],
-        quickReplyPayload = received_message.quick_reply.payload;
+        let quickReplyPayload = received_message.quick_reply.payload;
         // Create the payload for a basic text message
         switch(quickReplyPayload) {
             case "about_us":
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.about_us, undefined, buttons.quick_reply_buttons.fallback);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleAboutUs();
             case "enrollment":
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.enrollment);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleEnrollment();
             case "application":
-                responses.push(ResponseGenerator.generateText(botResponses.application.lead));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.application);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleApplication();
             case "talk_to_agent":
-                responses.push(ResponseGenerator.generateText(botResponses.general.talk_to_agent));
-                break;
+                return HandlerHelpers.handleTalkToAgent();
             case "certificates":
-                responses.push(ResponseGenerator.generateText(botResponses.faq.certificates_lead));
-                response = ResponseGenerator.generateQuickReply(botResponses.faq.certificates_follow_up, undefined, buttons.quick_reply_buttons.fallback);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleCertificates();
             case "cost_to_attend":
-                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.plans));
-                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.monthly));
-                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.annualy));
-                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.premium));
-                responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.financial_aid));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.enrollment);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleCostToAttend();
             case "transfer_credit":
-                responses.push(ResponseGenerator.generateText(botResponses.transfer_credits.possibility));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleTransferCredit();
             case "location":
-                responses.push(ResponseGenerator.generateText(botResponses.location));
-                response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handleLocation();
             case "programs":
-                // a variable to hold the carousel's generic templates 
-                let payloadElements = [];
-                // loop through each program generating a template for it for the carousel
-                buttons.template_buttons.programs.apply_now.forEach(value => {
-                    let carouselItem = {
-                        image_url: value.image_url,
-                        title: value.title,
-                        subtitle: undefined,
-                        buttons: [
-                            ResponseGenerator.generateUrlButton({title: "Apply now", url: REMOTE_UNIVERSITY_APPLY_URL, webview_height_ratio :"tall", messenger_extensions: true}),
-                            ResponseGenerator.generateUrlButton({title: "Learn more", url: value.web_url})
-                        ]
-                    };
-                    payloadElements.push(carouselItem);
-                });
-                response = ResponseGenerator.generateCarouselTemplate(payloadElements);
-                responses.push(response);
-                break;
+                return HandlerHelpers.handlePrograms();
+            default:
+                return HandlerHelpers.fallback();
         }
-        return responses;
     }
 };
