@@ -1,6 +1,7 @@
 const ResponseGenerator = require("../utils/response-generator"),
 botResponses = require("../fixtures/bot-responses.js"),
 buttons =  require("../fixtures/buttons");
+const { REMOTE_UNIVERSITY_APPLY_URL } = require("../utils/constants");
 
 module.exports = class HandlerHelpers {
     static handleAboutUs() {
@@ -18,6 +19,13 @@ module.exports = class HandlerHelpers {
         responses.push(response);
         return responses;
     }
+    static handleEligibility() {
+        let responses = [], response;
+        responses.push(ResponseGenerator.generateText(botResponses.application.eligibility));
+        response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
+        responses.push(response);
+        return responses;
+    }
     static handleTalkToAgent() {
         let response = ResponseGenerator.generateText(botResponses.general.talk_to_agent);
         return [response];
@@ -30,7 +38,7 @@ module.exports = class HandlerHelpers {
         return responses;
     }
     static handleCostToAttend() {
-        let responses, response;
+        let responses = [], response;
         responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.plans));
         responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.monthly));
         responses.push(ResponseGenerator.generateText(botResponses.cost_to_attend.annualy));
@@ -56,7 +64,7 @@ module.exports = class HandlerHelpers {
     }
     static handlePrograms() {
         // a variable to hold the carousel's generic templates 
-        let payloadElements = [];
+        let payloadElements = [], responses = [], response;
         // loop through each program generating a template for it for the carousel
         buttons.template_buttons.programs.apply_now.forEach(value => {
             let carouselItem = {
@@ -71,6 +79,22 @@ module.exports = class HandlerHelpers {
             payloadElements.push(carouselItem);
         });
         response = ResponseGenerator.generateCarouselTemplate(payloadElements);
+        responses.push(response);
+        response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
+        responses.push(response);
+        return responses;
+    }
+    static handleAdmissions() {
+        let responses = [], response;
+        responses.push(ResponseGenerator.generateText(botResponses.application.admissions));
+        response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
+        responses.push(response);
+        return responses;
+    }
+    static handleRequirements() {
+        let responses = [], response;
+        responses.push(ResponseGenerator.generateText(botResponses.application.requirements));
+        response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option, undefined, buttons.quick_reply_buttons.fallback);
         responses.push(response);
         return responses;
     }

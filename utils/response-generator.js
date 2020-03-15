@@ -61,14 +61,6 @@ module.exports = class ResponseGenerator {
       };
     }
 
-    static generateImageTemplate() {
-        
-    }
-
-    static generateTextWithPersona() {
-
-    }
-
     static generatePostbackButton(title, payload) {
       return {
         type: "postback", 

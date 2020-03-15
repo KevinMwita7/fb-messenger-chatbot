@@ -13,7 +13,7 @@ module.exports = function sendMessages(sender_psid, responses) {
             delay += 1;
         });
     } else {
-        FacebookApi.callSendAPI(sender_psid, response);
+        FacebookApi.callSendAPI(sender_psid, responses);
         senderActions(sender_psid, "typing_off");
     }
 };

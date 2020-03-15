@@ -21,14 +21,17 @@ module.exports = {
         certificates_follow_up: "Upon completion of a course, a certificate is automatically generated that can be viewed online and shared."
     },
     application: {
-        lead: "I understand how hard the application process can be. I will try and make it easier."
+        lead: "I understand how hard the application process can be. I will try and make it easier.",
+        eligibility: "Remote University has no eligibility criteria. Anyone willing can join our platform and begin learning.",
+        requirements: "The only requirements needed to start learning on our platform are:\n- An internet enabled device\n- An internet connection\n- A curious mind",
+        admissions: "There is no admissions process for Remote University, but students can take skill assessments to identify where to start in a path based on their background. Students have access to video lessons and complete learning checks, skill assessments and certification practice exams throughout Paths."
     },
     cost_to_attend: {
         plans: "There are three plans to pick from: monthly, annual and premium.",
         monthly: "For the monthly plan, you will pay a monthly fee of $29 and gain access to all courses and assessments.",
         annualy: "For the annual plan, you will pay a yealy fee of $299 and gain access to all courses and assessments.",
         premium: "For the premium plan, you will pay a monthly fee of $499 and in addition to all courses and assessments, gain access to certification practice exams, interactive courses and projects",
-        financial_aid: "I understand it may be a challenge for you to have the funds listed above. Unfortunately, we do not offer any form of financial aid. However, you can get a trial period of 30 days before paying for the full course. To learn more visit https://remote-university-website-hdihgi6s6.now.sh"
+        financial_aid: "I understand it may be a challenge for you to have the funds listed above. Unfortunately, we do not offer any form of financial aid. However, you can get a trial period of 30 days before paying for the full course. To learn more visit https://remote-university-website-2.now.sh/"
     },
     transfer_credits: {
         possibility: "Unfortunately, Remote University does not offer credits for any course work covered."

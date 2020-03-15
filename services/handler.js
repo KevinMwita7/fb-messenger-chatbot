@@ -5,7 +5,6 @@ senderAction = require("./sender-actions"),
 buttons =  require("../fixtures/buttons"),
 sendMessages = require("../utils/send-messages"),
 nlp = require("./nlp");
-const { REMOTE_UNIVERSITY_APPLY_URL } = require("../utils/constants");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -29,13 +28,13 @@ module.exports = class Handler {
               // handle the messages enterer in the input box
               if(nlp(received_message.nlp, "about_us")) {
                 responses = HandlerHelpers.handleAboutUs();
-              } else if(nlp(received_message.nlp, "enrollment")) {
+              } else if(nlp(received_message.nlp, "enroll")) {
                 responses = HandlerHelpers.handleEnrollment();
               } else if(nlp(received_message.nlp, "application")) {
                 responses = HandlerHelpers.handleApplication(); 
               } else if(nlp(received_message.nlp, "talk_to_agent")) {
                 responses = HandlerHelpers.handleTalkToAgent();
-              } else if(nlp(received_message.nlp, "certicates")) {
+              } else if(nlp(received_message.nlp, "certificates")) {
                 responses = HandlerHelpers.handleCertificates();
               } else if(nlp(received_message.nlp, "cost_to_attend")) {
                   responses = HandlerHelpers.handleCostToAttend();
@@ -45,12 +44,20 @@ module.exports = class Handler {
                   responses = HandlerHelpers.handleLocation();
               } else if(nlp(received_message.nlp, "programs")) {
                   responses = HandlerHelpers.handlePrograms();    
+              } else if(nlp(received_message.nlp, "eligibility")) {
+                 responses = HandlerHelpers.handleEligibility();
+              } else if(nlp(received_message.nlp, "admissions")) {
+                responses = HandlerHelpers.handleAdmissions();
+              } else if(nlp(received_message.nlp, "requirements")) {
+                responses = HandlerHelpers.handleRequirements();
               } else {
                   responses = HandlerHelpers.fallback();
              }
           }
         }  else if(received_message.attachments) {
-            for(let attachment of received_message.attachments) {
+            response = ResponseGenerator.generateText("Sorry, I cannot accept attachments at the moment");
+            responses.push(response);
+            /*for(let attachment of received_message.attachments) {
                 // Gets the URL of the message attachment
                 let attachment_url = attachment.payload.url;
                 let payload = {
@@ -71,7 +78,7 @@ module.exports = class Handler {
                 };
                 response = ResponseGenerator.generateGenericTemplate(payload);
                 responses.push(response);
-            }
+            }*/
         }
         // Sends the response messages
         sendMessages(user.id, responses);
@@ -126,6 +133,12 @@ module.exports = class Handler {
                 return HandlerHelpers.handleLocation();
             case "programs":
                 return HandlerHelpers.handlePrograms();
+            case "eligibility":
+                return HandlerHelpers.handleEligibility();
+            case "admissions":
+                return HandlerHelpers.handleAdmissions();
+            case "requirements":
+                return HandlerHelpers.handleRequirements();
             default:
                 return HandlerHelpers.fallback();
         }
