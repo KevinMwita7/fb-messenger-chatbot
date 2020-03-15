@@ -11,7 +11,7 @@ const { PORT, VERIFICATION_TOKEN } = require("./config");
 const app = express();
 
 // set the port app will listen on
-// app.set("port", process.env.PORT);
+app.set("port", process.env.PORT);
 
 // register middlewares
 app.use(cors());
@@ -96,4 +96,4 @@ app.post('/webhook', (req, res) => {
     }
 });
 
-// app.listen(app.get("port"), () => console.log("App listening on port " + app.get("port")));
+app.listen(app.get("port"), () => console.log("App listening on port " + app.get("port")));
