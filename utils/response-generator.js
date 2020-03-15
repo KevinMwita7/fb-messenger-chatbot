@@ -76,11 +76,10 @@ module.exports = class ResponseGenerator {
         payload
       };
     }
-    static generateUrlButton(title, url) {
+    static generateUrlButton(buttonPayload) {
       return {
         type: "web_url",
-        url,
-        title
+        ...buttonPayload
       };
     }
 };

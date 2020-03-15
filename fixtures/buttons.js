@@ -1,3 +1,14 @@
+const {
+    REMOTE_UNIVERSITY_AI_URL,
+    REMOTE_UNIVERSITY_DATA_SCIENCE_URL,
+    REMOTE_UNIVERSITY_CLOUD_COMPUTING_URL,
+    REMOTE_UNIVERSITY_PROGRAMMING_URL,
+    REMOTE_UNIVERSITY_AI_IMAGE_URL,
+    REMOTE_UNIVERSITY_DATA_SCIENCE_IMAGE_URL,
+    REMOTE_UNIVERSITY_CLOUD_COMPUTING_IMAGE_URL,
+    REMOTE_UNIVERSITY_PROGRAMMING_IMAGE_URL
+} = require("../utils/constants")
+
 module.exports = {
     quick_reply_buttons: {
         fallback: [
@@ -24,10 +35,10 @@ module.exports = {
     template_buttons: {
         programs: {
             apply_now: [
-                {title: "Artificial Intelligence", payload: "artificial_intelligence", image_url: "https://cdn.pixabay.com/photo/2017/04/13/20/26/artificial-intelligence-2228610_1280.jpg", web_url: "https://remote-university-website-2.now.sh/programs/artificial-intelligence"},
-                {title: "Data Science", payload: "data_science", image_url: "https://cdn.pixabay.com/photo/2017/01/05/11/57/database-1954920_1280.jpg", web_url: "https://remote-university-website-2.now.sh/programs/data-science"},
-                {title: "Cloud Computing", payload: "cloud_computing", image_url: "https://cdn.pixabay.com/photo/2017/01/22/22/11/cloud-computing-2001090_1280.jpg", web_url: "https://remote-university-website-2.now.sh/programs/cloud-computing"},
-                {title: "Programming", payload: "programming", image_url: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png", web_url: "https://remote-university-website-2.now.sh/programs/programming"},
+                {title: "Artificial Intelligence", payload: "artificial_intelligence", image_url: REMOTE_UNIVERSITY_AI_IMAGE_URL, web_url: REMOTE_UNIVERSITY_AI_URL},
+                {title: "Data Science", payload: "data_science", image_url: REMOTE_UNIVERSITY_DATA_SCIENCE_IMAGE_URL, web_url: REMOTE_UNIVERSITY_DATA_SCIENCE_URL},
+                {title: "Cloud Computing", payload: "cloud_computing", image_url: REMOTE_UNIVERSITY_CLOUD_COMPUTING_IMAGE_URL, web_url: REMOTE_UNIVERSITY_CLOUD_COMPUTING_URL},
+                {title: "Programming", payload: "programming", image_url: REMOTE_UNIVERSITY_PROGRAMMING_IMAGE_URL, web_url: REMOTE_UNIVERSITY_PROGRAMMING_URL},
             ]
         }
     }

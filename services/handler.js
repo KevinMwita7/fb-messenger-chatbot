@@ -1,9 +1,10 @@
-const axios = require("axios").default;
-const ResponseGenerator = require("../utils/response-generator"); 
-const botResponses = require("../fixtures/bot-responses.js");
-const senderAction = require("./sender-actions");
-const buttons =  require("../fixtures/buttons");
-const sendMessages = require("../utils/send-messages");
+const axios = require("axios").default,
+ResponseGenerator = require("../utils/response-generator"),
+botResponses = require("../fixtures/bot-responses.js"),
+senderAction = require("./sender-actions"),
+buttons =  require("../fixtures/buttons"),
+sendMessages = require("../utils/send-messages");
+const { REMOTE_UNIVERSITY_APPLY_URL, REMOTE_UNIVERSITY_BASE_URL } = require("../utils/constants");
 
 module.exports = class Handler {
     handleMessage(user, received_message) {
@@ -134,8 +135,8 @@ module.exports = class Handler {
                         title: value.title,
                         subtitle: undefined,
                         buttons: [
-                            ResponseGenerator.generateUrlButton("Apply now", "apply_now"),
-                            ResponseGenerator.generatePostbackButton("Learn more", value.web_url)
+                            ResponseGenerator.generateUrlButton({title: "Apply now", url: REMOTE_UNIVERSITY_APPLY_URL, webview_height_ratio :"tall", messenger_extensions: true}),
+                            ResponseGenerator.generateUrlButton({title: "Learn more", url: value.web_url})
                         ]
                     };
                     payloadElements.push(carouselItem);
