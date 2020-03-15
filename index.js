@@ -23,7 +23,9 @@ app.use(express.urlencoded({extended: true}));
 
 // an array of all the users chatting with our bot
 let users = {};
-
+app.get("/", (req, res) => {
+  res.status(200).send("Hello world");
+});
 // handle GET requests for the webhook
 app.get('/webhook', (req, res) => {      
     // get the query params
