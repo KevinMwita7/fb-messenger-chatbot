@@ -30,6 +30,9 @@ module.exports = {
         programming: "Open the door to sought-after technology careers with a world-class online degree in Computer Science. You’ll master in-demand computing skills, solve complex problems, and hone your innovation and creativity. The hands-on project-based approach will help develop the technical and transferable skills needed for a fulfilling career in your field.",
         web_development: "Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the color, font, layout, and more!"
     },
+    enrollment: {
+        lead: "The enrollment process can be broken down into the steps below. Please choose one."
+    },
     faq: {
         about_us: "Remote University is an online platform that aims to enable individuals learn the skills they need, to land the jobs they want so as to build the lives they deserve. Founded in 2020, our mission is to power careers through tech education. We partner with leading technology companies to learn how technology is transforming industries, and teach the critical tech skills that companies are looking for in their workforce. To learn more, visit us at https://remote-university-website-2.now.sh/about",
         certificates_lead: "Remote University Certificates of Completion are certifications you earn for the courses you have completely watched on our platform.",

@@ -16,7 +16,7 @@ module.exports = class HandlerHelpers {
         return [response];
     }
     static handleEnrollment() {
-        let response = ResponseGenerator.generateQuickReply(botResponses.general.choose_option(), undefined, buttons.quick_reply_buttons.enrollment);
+        let response = ResponseGenerator.generateQuickReply(botResponses.enrollment.lead, undefined, buttons.quick_reply_buttons.enrollment);
         return [response];
     }
     static handleApplication() {
